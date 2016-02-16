@@ -1,0 +1,6 @@
+*.lua
+*_temp/
+logs/
+static/uploads/
+nginx.conf.compiled
+secret.moon
