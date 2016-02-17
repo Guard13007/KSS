@@ -5,8 +5,12 @@ models = require "models"
 import respond_to from require "lapis.application"
 
 class extends lapis.Application
+    layout: "layout"  -- require views.layout
+
+    --[index: "/"]: =>
+    --    redirect_to: @url_for "saves"
     [index: "/"]: =>
-        redirect_to: @url_for "saves"
+        render: true --should render views.index ?
 
     [save: "/save/:id"]: =>
         @html ->
@@ -61,6 +65,10 @@ class extends lapis.Application
             else
                 "Please refresh the page and actually upload a file." --this is bad form...
     }
+
+    --NOTE SUPER TEMPORARY PLACEHOLDER:
+    [users: "/users"]: =>
+        "Not done yet!"
 
     [create_user: "/create_user"]: respond_to {
         GET: =>
