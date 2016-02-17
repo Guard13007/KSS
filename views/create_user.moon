@@ -5,12 +5,14 @@ class CreateUser extends Widget
         form {
             action: "/create_user"
             method: "POST"
-            enctype: "multipart/form-data" -- no idea why/if we need this
+            enctype: "multipart/form-data" --TODO find out if this is needed and why
+            class: "pure-form"
         }, ->
             p "Username: "
-            input type: "text", name: "username"
+            input type: "text", name: "name"
             p "Password: "
             input type: "password", name: "password"
-            p "Is admin? "
+            p "Is admin? " --TODO REMOVE THIS AND NEXT LINE!!
             input type: "checkbox", name: "admin"
+            input type: "hidden", name: "csrf_token", value: @token
             input type: "submit"
