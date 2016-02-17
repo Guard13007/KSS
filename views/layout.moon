@@ -15,7 +15,7 @@ class Layout extends Widget
                         span -- Hamburger icon!
                     div id: "menu", ->
                         div class: "pure-menu", ->
-                            a class: "pure-menu-heading", href: @url_for("index"), "kss2" --NOTE top level special looking link (should it be used??)
+                            a class: "pure-menu-heading", href: @url_for("index"), "K.S.S." --NOTE top level special looking link (should it be used??)
                             ul class: "pure-menu-list", ->
                                 --li class: "pure-menu-item", -> a href: "#", class: "pure-menu-link", "Home"
                                 li class: "pure-menu-item", -> a href: @url_for("saves"), class: "pure-menu-link", "Saves"
@@ -36,8 +36,8 @@ class Layout extends Widget
                             p "Date:", br, os.date("!%Y-%m-%d", os.time()) , br, "Time:", br , os.date("!%H-%M.%S", os.time())
                     div id: "main", ->
                         div class: "header", ->
-                            h1 @title or "kss2"
-                            h2 @subtitle or "subtitle"
+                            h1 @title or "Kerbal Save Sharing"
+                            h2 @subtitle if @subtitle --TODO test (this should only render a subtitle if there is one)
                         div class: "content", ->
                             @content_for "inner"
                             --h2 class: "content-subhead", "Some sub-header"
