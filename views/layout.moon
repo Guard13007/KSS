@@ -32,6 +32,8 @@ class Layout extends Widget
                                 li class: "pure-menu-item", -> a href: "#", class: "pure-menu-link", "Create Account"
                                 li class: "pure-menu-item", -> a href: "#", class: "pure-menu-link", "Log In"
                                 li class: "pure-menu-item", -> a href: "#", class: "pure-menu-link", "Log Out"
+                            hr style: "color: white;" --TODO put these styles in CSS
+                            p "Date:", br, os.date("!%Y-%m-%d", os.time()) , br, "Time:", br , os.date("!%H-%M.%S", os.time())
                     div id: "main", ->
                         div class: "header", ->
                             h1 @title or "kss2"

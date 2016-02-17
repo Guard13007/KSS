@@ -8,16 +8,8 @@ class SavesApp extends lapis.Application
     "/save": => redirect_to: @url_for("saves"), status: 301
 
     [saves: "/saves"]: =>
-        if saves = Saves\select!
-            --TODO rewrite using a Widget and add the proper things!
-            @html ->
-                if #saves > 0
-                    ul ->
-                        for id in pairs saves
-                            li ->
-                                a href: @url_for("save", id: id), id --NOTE I don't like this format / style
-                else
-                    p "No saves."
+        @saves = Saves\select!
+        render: true
 
     [save: "/save/:id"]: => --TODO rewrite this as well! more details please!
         @html ->

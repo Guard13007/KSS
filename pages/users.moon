@@ -11,6 +11,15 @@ class UsersApp extends lapis.Application
     [users: "/users"]: =>
         "Not done yet!" --TODO finish (see /saves)
 
+    [user: "/user/:name"]: => --TODO rewrite this as well! more details please!
+        @html ->
+            if user = Users\find name: @params.name
+                h1 "It's working, shut up"
+                p @params.id
+                --a href: @build_url(save.file), "Test"
+            else
+                @write status: 404, "Not found"
+
     [create_user: "/create_user"]: respond_to {
         GET: =>
             @token = csrf.generate_token @

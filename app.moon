@@ -20,7 +20,7 @@ class App extends lapis.Application
         POST: =>
             file = @params.file
             if #file.content > 0
-                require("moon").p file
+                --require("moon").p file
                 date = os.date("!%Y-%m-%d.%H-%M.%S", os.time())
                 filename = "static/uploads/#{date .. file.filename\match("^.+(%..+)$")}"
                 File = io.open(filename, "w")
