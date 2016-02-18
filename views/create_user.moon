@@ -12,7 +12,5 @@ class CreateUser extends Widget
             input type: "text", name: "name"
             p "Password:"
             input type: "password", name: "password"
-            p "Is admin? " --TODO REMOVE THIS AND NEXT LINE!!
-            input type: "checkbox", name: "admin"
             input type: "hidden", name: "csrf_token", value: @token
             input type: "submit"
