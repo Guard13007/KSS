@@ -1,3 +1,5 @@
+db = require "lapis.db"
+
 import create_table
     types
     add_column from require "lapis.db.schema"
@@ -26,4 +28,10 @@ import create_table
         }
     [2]: =>
         add_column "users", "weekday", types.integer default: 0
+    [3]: =>
+        db.insert "users", {
+            name: "admin"
+            password: "changeme"
+            admin: true
+        }
 }

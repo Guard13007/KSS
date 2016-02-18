@@ -21,3 +21,19 @@ Should be working in a week or so.
    (run `lapis migrate [env]` (env is `production` or `development`))
 7. Start the server.
    (run `lapis server [env]` (same environments))
+8. Log into the default admin account and change its password.
+   (username: `admin`, password `changeme`)
+
+### Note to self
+
+If you fuck up and lose the `postgres` password...
+
+```
+sudo -i -u postgres
+psql
+ALTER USER postgres WITH PASSWORD 'new_password';
+\q
+exit
+```
+
+And now it's fixed.

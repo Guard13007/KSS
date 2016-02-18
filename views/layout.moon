@@ -25,10 +25,16 @@ class Layout extends Widget
                             hr!
                             day = os.date("!*t").wday
                             user = Users\find weekday: day
-                            p "Current user:", br, user.name
+                            if user
+                                p "Current user:", br, user.name
+                            else
+                                p "Current user:", br, "N/A"
                             p "Time remaining:", br, "TIME" --TODO end of today - current time
                             user = Users\find weekday: (day + 1)%7+1 --tomorrow!
-                            p "Next user:", br, user.name
+                            if user
+                                p "Next user:", br, user.name
+                            else
+                                p "Next user:", br, "N/A"
                             hr!
                             ul class: "pure-menu-list", ->
                                 if @session.username
