@@ -14,9 +14,10 @@ Should be working in a week or so.
    (for production: `kss_live`, for development: `kss_dev`)
 3. Create `secret.moon` with database password and a secret string.
    (see `secret.moon.example` for an example)
-4. Compile moonscript files.
+4. Create `static/uploads` directory.
+5. Compile moonscript files.
    (run `moonc .`)
-5. Run migrations.
+6. Run migrations.
    (run `lapis migrate [env]` (env is `production` or `development`))
-6. Start the server.
+7. Start the server.
    (run `lapis server [env]` (same environments))
