@@ -8,7 +8,7 @@ class Layout extends Widget
             head ->
                 meta charset: "utf-8"
                 meta name: "viewport", content: "width=device-width, initial-scale=1.0"
-                title @title or "kss2"
+                title @title or "K.S.S."
                 link rel: "stylesheet", href: @build_url "static/css/pure-min.css"
                 link rel: "stylesheet", href: @build_url "static/css/side-menu.css"
                 link rel: "stylesheet", href: @build_url "static/css/custom.css"
