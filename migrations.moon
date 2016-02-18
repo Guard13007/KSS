@@ -1,4 +1,6 @@
-import create_table, types from require "lapis.db.schema"
+import create_table
+    types
+    add_column from require "lapis.db.schema"
 
 {
     [1]: =>
@@ -22,4 +24,6 @@ import create_table, types from require "lapis.db.schema"
             {"created_at", types.time}
             {"updated_at", types.time}
         }
+    [2]: =>
+        add_column "users", "weekday", types.integer default: 0
 }
