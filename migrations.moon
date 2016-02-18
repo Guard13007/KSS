@@ -1,4 +1,4 @@
-db = require "lapis.db"
+Users = require "models.Users"
 
 import create_table
     types
@@ -29,7 +29,7 @@ import create_table
     [2]: =>
         add_column "users", "weekday", types.integer default: 0
     [3]: =>
-        db.insert "users", {
+        Users\create {
             name: "admin"
             password: "changeme"
             admin: true
