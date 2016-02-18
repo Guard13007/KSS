@@ -1,5 +1,7 @@
 import Widget from require "lapis.html"
 
+Users = require "models.Users"
+
 class Layout extends Widget
     content: =>
         html_5 ->
@@ -13,12 +15,11 @@ class Layout extends Widget
             body ->
                 div id: "layout", ->
                     a href: "#menu", id: "menuLink", class: "menu-link", ->
-                        span -- Hamburger icon!
+                        span! -- Hamburger icon!
                     div id: "menu", ->
                         div class: "pure-menu", ->
                             a class: "pure-menu-heading", href: @url_for("index"), "K.S.S." --NOTE top level special looking link (should it be used??)
                             ul class: "pure-menu-list", ->
-                                --li class: "pure-menu-item", -> a href: "#", class: "pure-menu-link", "Home"
                                 li class: "pure-menu-item", -> a href: @url_for("saves"), class: "pure-menu-link", "Saves"
                                 li class: "pure-menu-item", -> a href: @url_for("users"), class: "pure-menu-link", "Users"
                             hr!

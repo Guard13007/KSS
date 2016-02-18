@@ -22,8 +22,11 @@ class UsersApp extends lapis.Application
 
     [create_user: "/create_user"]: respond_to {
         GET: =>
-            @token = csrf.generate_token @
-            render: true
+            if @session.username
+                "You are logged in as #{@session.username}. Please log out before attempting to create a new account."
+            else
+                @token = csrf.generate_token @
+                render: true
         POST: =>
             csrf.assert_token @ --TODO make this pretty print invalid token instead of erroring out entirely
 
@@ -44,17 +47,24 @@ class UsersApp extends lapis.Application
             --TODO modify stack trace output to include note to email me the error ?!
 
             if user
-                @html -> p "Woo! New user! :D" --TODO rewrite this to redirect!
+                @session.username = user.name -- log them in
+                redirect_to: @url_for "user", name: user.name --TODO redirect to saves or index or something instead?
     }
 
     [login: "/login"]: respond_to {
         GET: =>
-            @token = csrf.generate_token @ --TODO figure out if the @ saves it in @ ??
-            render: true
+            if @session.username
+                "You are logged in as #{@session.username}. Please log out before attempting to log in as another user."
+            else
+                @token = csrf.generate_token @ --TODO figure out if the @ saves it in @ ??
+                render: true
         POST: =>
             csrf.assert_token @
-            --TODO verify details and login if able!
-            -- "logging in" is saving user.name as @session.username
+
+            if user = Users\find name: @params.name
+                if user.password == @params.password
+                    @session.username = user.name
+                    redirect_to: @url_for "user", name: user.name --TODO redirect somewhere else??
     }
 
     [logout: "/logout"]: =>
