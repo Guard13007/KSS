@@ -9,6 +9,7 @@ class Layout extends Widget
                 title @title or "kss2"
                 link rel: "stylesheet", href: @build_url "static/css/pure-min.css"
                 link rel: "stylesheet", href: @build_url "static/css/side-menu.css"
+                link rel: "stylesheet", href: @build_url "static/css/custom.css"
             body ->
                 div id: "layout", ->
                     a href: "#menu", id: "menuLink", class: "menu-link", ->
@@ -20,18 +21,18 @@ class Layout extends Widget
                                 --li class: "pure-menu-item", -> a href: "#", class: "pure-menu-link", "Home"
                                 li class: "pure-menu-item", -> a href: @url_for("saves"), class: "pure-menu-link", "Saves"
                                 li class: "pure-menu-item", -> a href: @url_for("users"), class: "pure-menu-link", "Users"
-                            hr style: "color: white;" --TODO put these styles in CSS
+                            hr!
                             p "Current user:", br, "NAME" --TODO pull from database
                             p "Time remaining:", br, "TIME" --TODO pull from database
                             p "Next user:", br, "NAME" --TODO pull from database
-                            hr style: "color: white;" --TODO put these styles in CSS
+                            hr!
                             ul class: "pure-menu-list", ->
                                 if @session.username
                                     li class: "pure-menu-item", -> a href: @url_for("logout"), class: "pure-menu-link", "Log Out"
                                 else
-                                    li class: "pure-menu-item", -> a href: @url_for("login"), class: "pure-menu-link", "Log In"
                                     li class: "pure-menu-item", -> a href: @url_for("create_user"), class: "pure-menu-link", "Create Account"
-                            hr style: "color: white;" --TODO put these styles in CSS
+                                    li class: "pure-menu-item", -> a href: @url_for("login"), class: "pure-menu-link", "Log In"
+                            hr!
                             p "Date:", br, os.date("!%Y-%m-%d", os.time()) , br, "Time:", br , os.date("!%H-%M.%S", os.time())
                     div id: "main", ->
                         div class: "header", ->
