@@ -1,0 +1,14 @@
+Flows to test:
+
+Attempt to upload when not logged in
+
+Create Account -> Attempt to upload (note: upload should not even be visible!)
+(NOTE: creating an account should log you in)
+
+Log in (account without upload privelage) -> Attempt to upload (shouldn't be visible) -> log out
+
+Attempt to Log out when not logged in (should just redirect to index)
+
+Look at things, upload (on the correct day)
+
+Upload as admin.

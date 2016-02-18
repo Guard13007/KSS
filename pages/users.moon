@@ -15,7 +15,7 @@ class UsersApp extends lapis.Application
         @html ->
             if user = Users\find name: @params.name
                 h1 "It's working, shut up"
-                p @params.id
+                p @params.name
                 --a href: @build_url(save.file), "Test"
             else
                 @write status: 404, "Not found"
@@ -44,5 +44,19 @@ class UsersApp extends lapis.Application
             --TODO modify stack trace output to include note to email me the error ?!
 
             if user
-                @html -> p "Woo! New user! :D" --TODO rewrite this to be..better
+                @html -> p "Woo! New user! :D" --TODO rewrite this to redirect!
     }
+
+    [login: "/login"]: respond_to {
+        GET: =>
+            @token = csrf.generate_token @ --TODO figure out if the @ saves it in @ ??
+            render: true
+        POST: =>
+            csrf.assert_token @
+            --TODO verify details and login if able!
+            -- "logging in" is saving user.name as @session.username
+    }
+
+    [logout: "/logout"]: =>
+        @session.username = nil --this should be all that is needed to log out
+        redirect_to: @url_for("index")

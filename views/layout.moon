@@ -26,12 +26,11 @@ class Layout extends Widget
                             p "Next user:", br, "NAME" --TODO pull from database
                             hr style: "color: white;" --TODO put these styles in CSS
                             ul class: "pure-menu-list", ->
-                                --li class: "pure-menu-item", -> a href: @url_for("create_user"), class: "pure-menu-link", "Create Account"
-                                --li class: "pure-menu-item", -> a href: @url_for("login"), class: "pure-menu-link", "Log In"
-                                --li class: "pure-menu-item", -> a href: @url_for("logout"), class: "pure-menu-link", "Log Out"
-                                li class: "pure-menu-item", -> a href: "#", class: "pure-menu-link", "Create Account"
-                                li class: "pure-menu-item", -> a href: "#", class: "pure-menu-link", "Log In"
-                                li class: "pure-menu-item", -> a href: "#", class: "pure-menu-link", "Log Out"
+                                if @session.username
+                                    li class: "pure-menu-item", -> a href: @url_for("logout"), class: "pure-menu-link", "Log Out"
+                                else
+                                    li class: "pure-menu-item", -> a href: @url_for("login"), class: "pure-menu-link", "Log In"
+                                    li class: "pure-menu-item", -> a href: @url_for("create_user"), class: "pure-menu-link", "Create Account"
                             hr style: "color: white;" --TODO put these styles in CSS
                             p "Date:", br, os.date("!%Y-%m-%d", os.time()) , br, "Time:", br , os.date("!%H-%M.%S", os.time())
                     div id: "main", ->
