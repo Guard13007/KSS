@@ -11,14 +11,11 @@ class UsersApp extends lapis.Application
     [users: "/users"]: =>
         return "Not done yet!" --TODO #25
 
-    [user: "/user/:name"]: => --TODO #26
-        @html ->
-            if user = Users\find name: @params.name
-                h1 "It's working, shut up"
-                p @params.name
-                --a href: @build_url(save.file), "Test"
-            else
-                @write status: 404, "Not found"
+    [user: "/user/:name"]: =>
+        @user = Users\find name: @params.name
+        @title = @user.name
+        @subtitle = @user.id
+        render: true
 
     [create_user: "/create_user"]: respond_to {
         GET: =>
