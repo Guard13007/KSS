@@ -50,9 +50,9 @@ class UploadApp extends lapis.Application
                     }
 
                     if new_save
-                        redirect_to: @url_for "save", id: new_save.id
+                        return redirect_to: @url_for "save", id: new_save.id
                     else
-                        os.remove(filename) --delete the file, (failed saving to database)
+                        os.remove filename --delete the file, (failed saving to database)
                         return errorMsg
             else
                 return "Please go back and upload a file."
