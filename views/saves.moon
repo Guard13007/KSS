@@ -4,7 +4,7 @@ Users = require "models.Users"
 
 class SavesWidget extends Widget
     content: =>
-        element "table", class: "pure-table", style: "margin: 0 auto;", -> --TODO styling needs to be in CSS
+        element "table", class: "pure-table", ->
             thead ->
                 tr ->
                     th "Uploaded at (UTC)"
@@ -25,7 +25,7 @@ class SavesWidget extends Widget
                     tr ->
                         td "None"
                         td "N/A"
-                        td "No upload"
-                        td "No saves"
+                        td "No uploads"
+                        td "No data"
         --hr
         --p "If download links are opening in a new tab instead of downloading, please right-click the link and choose 'save-as' (or ", a(href: "http://caniuse.com/#feat=download", "use a better browser"), ")."

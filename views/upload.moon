@@ -10,7 +10,7 @@ class UploadWidget extends Widget
         }, ->
             p "Report:"
             textarea rows: 8, cols: 60, name: "report"
-            p "Save file:" --NOTE this will be different in the future
+            p "Save file:"
             input type: "file", name: "file"
             input type: "hidden", name: "csrf_token", value: @token
             input type: "submit"
