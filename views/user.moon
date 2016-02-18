@@ -1,5 +1,7 @@
 import Widget from require "lapis.html"
 
+Users = require "models.Users"
+
 get_day = (day) ->
     switch day
         when 0
@@ -30,3 +32,34 @@ class UserWidget extends Widget
         hr!
         p "Created at: ", @user.created_at
         p "Last updated at: ", @user.updated_at
+        if @session.username
+            user = Users\find name: @session.username
+            if @user.name == @session.username
+                hr!
+                h2 "Change Password?"
+                p "(Note: Non-functional at this time, sorry!)"
+                form {
+                    --data
+                }, ->
+                    p "Old password:"
+                    input type: "password", name: "oldpassword"
+                    p "New password:"
+                    input type: "password", name: "password"
+                    input type: "submit"
+
+            if user.admin and
+                hr!
+                h2 "Admin Panel"
+                p "NOTE: Non-functional at this time, sorry!"
+                form {
+                    --data
+                }, ->
+                    p "Rename:"
+                    input type: "text", name: "name"
+                    p "Weekday (0-7):"
+                    input type: "text", name: "weekday" --TODO probably a better type exists!
+                    p "Admin?"
+                    input type: "checkbox", name: "admin"
+                    p "Delete user?"
+                    input type: "checkbox", name: "delete"
+                    input type: "submit"
