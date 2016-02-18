@@ -30,17 +30,9 @@ class UsersApp extends lapis.Application
         POST: =>
             csrf.assert_token @ --TODO make this pretty print invalid token instead of erroring out entirely
 
-            --TODO replace setting admin with..false
-            --if @params.admin
-            --    @params.admin = true
-            --else
-            --    @params.admin = false
-
             user, errorMsg = Users\create {
                 name: @params.name
                 password: @params.password
-                --admin: @params.admin
-                --weekday: 0
             }
 
             --TODO check if user, print errorMsg

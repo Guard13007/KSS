@@ -1,7 +1,5 @@
 import Model from require "lapis.db.model"
 
-local Users
-
 class Users extends Model
     @timestamp: true
     url_params: (req, ...) =>

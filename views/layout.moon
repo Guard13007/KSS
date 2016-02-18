@@ -23,9 +23,12 @@ class Layout extends Widget
                                 li class: "pure-menu-item", -> a href: @url_for("saves"), class: "pure-menu-link", "Saves"
                                 li class: "pure-menu-item", -> a href: @url_for("users"), class: "pure-menu-link", "Users"
                             hr!
-                            p "Current user:", br, "NAME" --TODO pull from database
-                            p "Time remaining:", br, "TIME" --TODO pull from database
-                            p "Next user:", br, "NAME" --TODO pull from database
+                            day = os.date("!*t").wday
+                            user = Users\find weekday: day
+                            p "Current user:", br, user.name
+                            p "Time remaining:", br, "TIME" --TODO end of today - current time
+                            user = Users\find weekday: (day + 1)%7+1 --tomorrow!
+                            p "Next user:", br, user.name
                             hr!
                             ul class: "pure-menu-list", ->
                                 if @session.username

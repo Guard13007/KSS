@@ -1,14 +1,13 @@
 lapis = require "lapis"
 csrf = require "lapis.csrf"
 
-Saves = require "models.Saves" --TODO learn autoload
+Saves = require "models.Saves"
 Users = require "models.Users"
 
 import respond_to from require "lapis.application"
 
 class UploadApp extends lapis.Application
     [upload: "/upload"]: respond_to {
-        --TODO before: =>
         GET: =>
             @token = csrf.generate_token @
             render: true

@@ -1,8 +1,6 @@
 lapis = require "lapis"
 
-Saves = require "models.Saves" --TODO learn how to use the fancy autoload thing properly
-
-import respond_to from require "lapis.application" --not needed?
+Saves = require "models.Saves"
 
 class SavesApp extends lapis.Application
     "/save": => redirect_to: @url_for("saves"), status: 301

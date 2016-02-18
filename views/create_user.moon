@@ -5,7 +5,7 @@ class CreateUser extends Widget
         form {
             action: "/create_user"
             method: "POST"
-            enctype: "multipart/form-data" --TODO find out if this is needed and why
+            enctype: "multipart/form-data"
             class: "pure-form"
         }, ->
             p "Username:"
