@@ -8,9 +8,9 @@ class CreateUser extends Widget
             enctype: "multipart/form-data" --TODO find out if this is needed and why
             class: "pure-form"
         }, ->
-            p "Username: "
+            p "Username:"
             input type: "text", name: "name"
-            p "Password: "
+            p "Password:"
             input type: "password", name: "password"
             p "Is admin? " --TODO REMOVE THIS AND NEXT LINE!!
             input type: "checkbox", name: "admin"

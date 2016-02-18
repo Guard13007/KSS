@@ -1,7 +1,8 @@
 lapis = require "lapis"
 csrf = require "lapis.csrf"
 
-models = require "models"
+Saves = require "models.Saves" --TODO learn autoload
+Users = require "models.Users"
 
 import respond_to from require "lapis.application"
 
@@ -26,12 +27,12 @@ class UploadApp extends lapis.Application
                 @html ->
                     p "Uploaded #{file.filename}, #{#file.content} bytes written. Saved to /#{filename}"
 
-                new_save = models.Saves\create {
+                new_save = Saves\create {
                     file: filename
                     report: @params.report
                     -- user: ?
                     -- user_id: ?
-                    user_id: (models.Users\find name: "test").id
+                    user_id: (Users\find name: "test").id
                 }
                 --TODO learn how to catch an error here and display better error page
 
