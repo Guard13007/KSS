@@ -13,6 +13,10 @@ class UsersApp extends lapis.Application
 
     [user: "/user/:name"]: =>
         @user = Users\find name: @params.name
+
+        if not @user
+            return status: 404, "Not found."
+
         @title = @user.name
         @subtitle = @user.id
         render: true
@@ -48,7 +52,7 @@ class UsersApp extends lapis.Application
             if @session.username
                 return "You are logged in as #{@session.username}. Please log out before attempting to log in as another user."
             else
-                @token = csrf.generate_token @ --TODO figure out if the @ saves it in @ ??
+                @token = csrf.generate_token @ --TODO figure out if the @ saves it in @ ?? (just print the damn @)
                 render: true
         POST: =>
             csrf.assert_token @
@@ -57,8 +61,8 @@ class UsersApp extends lapis.Application
                 if user.password == @params.password
                     @session.username = user.name
                     redirect_to: @url_for "user", name: user.name --TODO redirect somewhere else
-                else
-                    return "Invalid login information."
+
+            return "Invalid login information."
     }
 
     [logout: "/logout"]: =>

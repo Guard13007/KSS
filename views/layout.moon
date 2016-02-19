@@ -46,7 +46,7 @@ class Layout extends Widget
                                     li class: "pure-menu-item", -> a href: @url_for("create_user"), class: "pure-menu-link", "Create Account"
                                     li class: "pure-menu-item", -> a href: @url_for("login"), class: "pure-menu-link", "Log In"
                             hr!
-                            p "Date:", br, os.date("!%Y-%m-%d", os.time()) , br, "Time:", br , os.date("!%H-%M.%S", os.time())
+                            p "Date:", br, os.date("!%Y/%m/%d") , br, "Time:", br , os.date("!%H:%M")
                     div id: "main", ->
                         div class: "header", ->
                             h1 @title or "Kerbal Save Sharing"
