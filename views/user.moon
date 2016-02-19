@@ -28,8 +28,9 @@ class UserWidget extends Widget
         p "This user's weekday is:", get_day @user.weekday
         p "Sorry, not much else available on users yet. We're working on it."
         hr!
-        p "Is admin? ", @user.admin
-        hr!
+        if @user.admin
+            p "This user is an admin."
+            hr!
         p "Created at: ", @user.created_at
         p "Last updated at: ", @user.updated_at
         if @session.username

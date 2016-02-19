@@ -30,7 +30,7 @@ class Layout extends Widget
                             else
                                 p "Current user:", br, "N/A"
                             p "Time remaining:", br, "TIME" --TODO end of today - current time
-                            user = Users\find weekday: (day + 1)%7+1 --tomorrow!
+                            user = Users\find weekday: (day + 1)%8+1 --tomorrow!
                             if user
                                 p "Next user:", br, user.name
                             else
