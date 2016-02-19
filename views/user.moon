@@ -28,7 +28,6 @@ class UserWidget extends Widget
         p "This user's weekday is:", get_day @user.weekday
         p "Sorry, not much else available on users yet. We're working on it."
         hr!
-        require("moon").p @user --debug!
         if @user.admin
             p "This user is an admin."
             hr!
