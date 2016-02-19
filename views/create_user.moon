@@ -13,4 +13,5 @@ class CreateUser extends Widget
             p "Password:"
             input type: "password", name: "password"
             input type: "hidden", name: "csrf_token", value: @token
+            br!
             input type: "submit"

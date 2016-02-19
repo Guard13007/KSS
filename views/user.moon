@@ -41,11 +41,13 @@ class UserWidget extends Widget
                 p "(Note: Non-functional at this time, sorry!)"
                 form {
                     --data
+                    class: "pure-form"
                 }, ->
                     p "Old password:"
                     input type: "password", name: "oldpassword"
                     p "New password:"
                     input type: "password", name: "password"
+                    br!
                     input type: "submit"
 
             if user.admin and
@@ -54,6 +56,7 @@ class UserWidget extends Widget
                 p "NOTE: Non-functional at this time, sorry!"
                 form {
                     --data
+                    class: "pure-form"
                 }, ->
                     p "Rename:"
                     input type: "text", name: "name"
@@ -63,4 +66,5 @@ class UserWidget extends Widget
                     input type: "checkbox", name: "admin"
                     p "Delete user?"
                     input type: "checkbox", name: "delete"
+                    br!
                     input type: "submit"
