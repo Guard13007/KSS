@@ -40,7 +40,8 @@ class UploadApp extends lapis.Application
                 if file_exists filename
                     return "Error: Please upload again in a moment, and report this error to Guard13007 immediately." --TODO remove the need for this error
 
-                if File, errorMsg = io.open(filename, "w")
+                File, errorMsg = io.open(filename, "w")
+                if File
                     File\write file.content
                     File\close!
                 else
