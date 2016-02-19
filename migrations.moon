@@ -1,8 +1,8 @@
-Users = require "models.Users"
-
 import create_table
     types
     add_column from require "lapis.db.schema"
+
+db = require "lapis.db"
 
 {
     [1]: =>
@@ -29,9 +29,8 @@ import create_table
     [2]: =>
         add_column "users", "weekday", types.integer default: 0
     [3]: =>
-        Users\create {
-            name: "admin"
-            password: "changeme"
-            admin: true
-        }
+        -- this was a derp that ended up just running a SELECT
+        assert true
+    [4]: =>
+        assert db.query db.raw "INSERT INTO \"users\" (\"password\", \"updated_at\", \"created_at\", \"name\") VALUES ('changeme', '2016-02-19 05:12:32', '2016-02-19 05:12:32', 'admin') RETURNING \"id\""
 }
