@@ -23,6 +23,8 @@ class UploadApp extends lapis.Application
         POST: =>
             csrf.assert_token @
 
+            @title = "Error" --redirects on success, so this will only apply to an error
+
             if not @session.username
                 return "You must be logged in to upload a file."
 

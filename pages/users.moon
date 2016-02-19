@@ -9,12 +9,14 @@ class UsersApp extends lapis.Application
     "/user": => redirect_to: @url_for("users"), status: 301
 
     [users: "/users"]: =>
+        @title = "Users"
         return "Not done yet!" --TODO #25
 
     [user: "/user/:name"]: =>
         @user = Users\find name: @params.name
 
         if not @user
+            @title = "User Not Found"
             return status: 404, "Not found."
 
         @title = @user.name
@@ -27,6 +29,8 @@ class UsersApp extends lapis.Application
                 return "You are logged in as #{@session.username}. Please log out before attempting to create a new account."
             else
                 @token = csrf.generate_token @
+                @title = "Create Account"
+                @subtitle = "Welcome to K.S.S."
                 render: true
         POST: =>
             csrf.assert_token @ --TODO make this pretty print invalid token instead of erroring out entirely
@@ -53,6 +57,7 @@ class UsersApp extends lapis.Application
                 return "You are logged in as #{@session.username}. Please log out before attempting to log in as another user."
             else
                 @token = csrf.generate_token @
+                @title = "Log In"
                 render: true
         POST: =>
             csrf.assert_token @

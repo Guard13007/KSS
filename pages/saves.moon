@@ -7,10 +7,13 @@ class SavesApp extends lapis.Application
 
     [saves: "/saves"]: =>
         @saves = Saves\select!
+        @title = "All Saves"
         render: true
 
-    [save: "/save/:id"]: => --TODO rewrite this as well! more details please!
+    [save: "/save/:id"]: => --TODO rewrite this as well! more details please! (and use a widget)
         @html ->
+            @title = "Save by USER.NAME" --change to the user's name
+            @subtitle = @params.id -- MAKE BETTER OBVIOUSLY
             if save = Saves\find @params.id
                 h1 "It's working, shut up"
                 p @params.id
