@@ -52,7 +52,8 @@ class UsersApp extends lapis.Application
             if @session.username
                 return "You are logged in as #{@session.username}. Please log out before attempting to log in as another user."
             else
-                @token = csrf.generate_token @ --TODO figure out if the @ saves it in @ ?? (just print the damn @)
+                @token = csrf.generate_token @
+                require("moon").p @
                 render: true
         POST: =>
             csrf.assert_token @
