@@ -39,24 +39,24 @@ class UploadApp extends lapis.Application
 
                 if file_exists filename
                     return "Error: Please upload again in a moment, and report this error to Guard13007 immediately." --TODO remove the need for this error
+
+                if File, errorMsg = io.open(filename, "w")
+                    File\write file.content
+                    File\close!
                 else
-                    if File, errorMsg = io.open(filename, "w")
-                        File\write file.content
-                        File\close!
-                    else
-                        return errorMsg
+                    return errorMsg
 
-                    new_save, errorMsg = Saves\create {
-                        file: filename
-                        report: @params.report
-                        user_id: user.id
-                    }
+                new_save, errorMsg = Saves\create {
+                    file: filename
+                    report: @params.report
+                    user_id: user.id
+                }
 
-                    if new_save
-                        return redirect_to: @url_for "save", id: new_save.id
-                    else
-                        os.remove filename --delete the file, (failed saving to database)
-                        return errorMsg
+                if new_save
+                    return redirect_to: @url_for "save", id: new_save.id
+                else
+                    os.remove filename --delete the file, (failed saving to database)
+                    return errorMsg
             else
                 return "Please upload a file with content."
     }
