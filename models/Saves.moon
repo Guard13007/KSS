@@ -25,4 +25,5 @@ class Saves extends Model
 
     @relations: {
         {"user", belongs_to: "Users"}
+        -- should have save\get_user! available now
     }

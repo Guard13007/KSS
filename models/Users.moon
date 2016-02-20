@@ -33,4 +33,7 @@ class Users extends Model
 
     @relations: {
         {"saves", has_many: "Saves"}
+        -- user\get_saves! --a list of save objects
+        -- saves = user\get_saves_paginated per_page: 50 --get a paginator, 50 saves at a time
+        -- saves\get_page 3 --get a list of saves based on page
     }
