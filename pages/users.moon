@@ -63,8 +63,9 @@ class UsersApp extends lapis.Application
             user = Users\find id: @params.user_id
 
             if user == current_user --NOTE can we directly compare them like this or not??
+                print("ENTER")
                 if user.password == @params.oldpassword
-                    require("moon").p(user\update password: "") --should print any return values, right?
+                    user\update password: "" --should print any return values, right?
                 else
                     return "Invalid password."
 
