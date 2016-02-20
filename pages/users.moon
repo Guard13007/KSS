@@ -9,8 +9,9 @@ class UsersApp extends lapis.Application
     "/user": => redirect_to: @url_for("users"), status: 301
 
     [users: "/users"]: =>
-        @title = "Users"
-        return "Not done yet!" --TODO #25
+        @users = Users\select!
+        @title = "All Users"
+        render: true
 
     [user: "/user/:name"]: =>
         @user = Users\find name: @params.name
