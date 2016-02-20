@@ -30,5 +30,5 @@ class SavesWidget extends Widget
         hr!
         p ->
             text "If download links are opening in a new tab instead of downloading, please right-click the link and choose 'save-as' (or "
-            a href: "http://caniuse.com/#feat=download", "use a better browser")
+            a href: "http://caniuse.com/#feat=download", "use a better browser"
             text ")."
