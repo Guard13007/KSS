@@ -10,11 +10,10 @@ class UsersWidget extends Widget
                     th "Weekday"
             tbody ->
                 if #@users > 0
-                    require("moon").p @users --temporary, take a look at it
-                    for id in ipairs @users --I want to sort by name...
+                    for i in ipairs @users
                         tr ->
-                            td -> a href: @url_for("user", name: @users[id].name), @users[id].name
-                            td -> get_day @users[id].weekday
+                            td -> a href: @url_for("user", name: @users[i].name), @users[i].name
+                            td -> get_day @users[i].weekday
                 else
                     tr ->
                         td "None"
