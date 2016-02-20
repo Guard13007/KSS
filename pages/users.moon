@@ -9,7 +9,7 @@ class UsersApp extends lapis.Application
     "/user": => redirect_to: @url_for("users"), status: 301
 
     [users: "/users"]: =>
-        @users = Users\select!
+        @users = Users\select "ORDER BY name ASC"
         @title = "All Users"
         render: true
 
@@ -64,7 +64,7 @@ class UsersApp extends lapis.Application
 
             if user == current_user --NOTE can we directly compare them like this or not??
                 if user.password == @params.oldpassword
-                    require("moon").p user\update password: @params.password --TODO verify whether this returns or not
+                    require("moon").p user\update password: "" --TODO verify whether this returns or not
 
             if current_user.admin
                 require("moon").p @params
