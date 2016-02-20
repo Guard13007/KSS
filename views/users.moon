@@ -1,7 +1,7 @@
 import Widget from require "lapis.html"
 import get_day from require "helpers"
 
-class UserWidget extends Widget
+class UsersWidget extends Widget
     content: =>
         element "table", class: "pure-table", ->
             thead ->
