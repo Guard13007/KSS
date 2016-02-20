@@ -19,6 +19,7 @@ class UsersApp extends lapis.Application
             @title = "User Not Found"
             return status: 404, "Not found."
 
+        @token = csrf.generate_token @
         @title = @user.name
         @subtitle = @user.id
         render: true
@@ -49,6 +50,29 @@ class UsersApp extends lapis.Application
                 redirect_to: @url_for "user", name: user.name --TODO redirect somewhere else
             else
                 return errorMsg
+    }
+
+    [modify_user: "/modify_user"]: respond_to {
+        GET: =>
+            return status: 404, "Not found."
+        POST: =>
+            csrf.assert_token @
+
+            current_user = Users\find name: @session.username
+            user = Users\find id: @params.user_id
+
+            if user == current_user --NOTE can we directly compare them like this or not??
+                if user.password == @params.oldpassword
+                    require("moon").p user\update password: @params.password --TODO verify whether this returns or not
+
+            if current_user.admin
+                require("moon").p @params
+                    --TODO figure out how to process these properly:
+                    --input type: "text", name: "name"
+                    --input type: "number", name: "weekday"
+                    --input type: "checkbox", name: "admin"
+                    --input type: "checkbox", name: "delete"
+                    --input type: "hidden", name: "user_id", value: @user.id
     }
 
     [login: "/login"]: respond_to {

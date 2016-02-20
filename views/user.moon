@@ -21,11 +21,11 @@ get_day = (day) ->
         when 7
             return "Saturday"
         else
-            return "An error has occured. A very serious error. Contact Guard13007 at once!"
+            error("User \"#{@user.name}\" (ID: \"#{@user.id}\") has invalid weekday.")
 
 class UserWidget extends Widget
     content: =>
-        p "This user's weekday is:", get_day @user.weekday
+        p "This user's weekday is: ", get_day @user.weekday
         p "Sorry, not much else available on users yet. We're working on it."
         hr!
         if @user.admin
@@ -38,33 +38,39 @@ class UserWidget extends Widget
             if @user.name == @session.username
                 hr!
                 h2 "Change Password?"
-                p "(Note: Non-functional at this time, sorry!)"
                 form {
-                    --data
+                    action: "/modify_user"
+                    method: "POST"
+                    enctype: "multipart/form-data"
                     class: "pure-form"
                 }, ->
                     p "Old password:"
                     input type: "password", name: "oldpassword"
                     p "New password:"
                     input type: "password", name: "password"
+                    input type: "hidden", name: "user_id", value: @user.id
+                    input type: "hidden", name: "csrf_token", value: @token
                     br!
                     input type: "submit"
 
             if user.admin and
                 hr!
                 h2 "Admin Panel"
-                p "NOTE: Non-functional at this time, sorry!"
                 form {
-                    --data
+                    action: "/modify_user"
+                    method: "POST"
+                    enctype: "multipart/form-data"
                     class: "pure-form"
                 }, ->
                     p "Rename:"
                     input type: "text", name: "name"
-                    p "Weekday (0-7):"
-                    input type: "text", name: "weekday" --TODO probably a better type exists!
-                    p "Admin?"
+                    p "Weekday (0-7):" --TODO consider changing to a dropdown menu selection
+                    input type: "number", name: "weekday"
+                    p "Admin? "
                     input type: "checkbox", name: "admin"
-                    p "Delete user?"
+                    p "Delete user? "
                     input type: "checkbox", name: "delete"
+                    input type: "hidden", name: "user_id", value: @user.id
+                    input type: "hidden", name: "csrf_token", value: @token
                     br!
                     input type: "submit"
