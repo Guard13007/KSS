@@ -14,8 +14,8 @@ class UserWidget extends Widget
         p "Created at: ", @user.created_at
         p "Last updated at: ", @user.updated_at
         if @session.username
-            user = Users\find name: @session.username
-            if @user.name == @session.username
+            current_user = Users\find name: @session.username
+            if @user.name == current_user.name
                 hr!
                 h2 "Change Password?"
                 form {
@@ -33,7 +33,7 @@ class UserWidget extends Widget
                     br!
                     input type: "submit"
 
-            if user.admin and
+            if current_user.admin and
                 hr!
                 h2 "Admin Panel"
                 form {
@@ -43,11 +43,14 @@ class UserWidget extends Widget
                     class: "pure-form"
                 }, ->
                     p "Rename:"
-                    input type: "text", name: "name"
+                    input type: "text", name: "name", defaultValue: @user.name
                     p "Weekday (0-7):" --TODO consider changing to a dropdown menu selection
-                    input type: "number", name: "weekday"
+                    input type: "number", name: "weekday", value: @user.weekday
                     p "Admin? "
-                    input type: "checkbox", name: "admin"
+                    if @user.admin
+                        input type: "checkbox", name: "admin", checked: true
+                    else
+                        input type: "checkbox", name: "admin"
                     p "Delete user? "
                     input type: "checkbox", name: "delete"
                     input type: "hidden", name: "user_id", value: @user.id
