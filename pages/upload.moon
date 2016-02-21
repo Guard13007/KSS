@@ -47,7 +47,7 @@ class UploadApp extends lapis.Application
                     File\write file.content
                     File\close!
                 else
-                    return errorMsg
+                    return errorMsg .. " WFHBEQWI&G#&@"
 
                 new_save, errorMsg = Saves\create {
                     file: filename
