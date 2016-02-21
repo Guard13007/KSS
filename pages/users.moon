@@ -66,15 +66,6 @@ class UsersApp extends lapis.Application
             current_user = Users\find name: @session.username
             user = Users\find id: @params.user_id
 
-            if user.id == current_user.id
-                print("ENTER")
-                if user.password == @params.oldpassword
-                    user, errorMsg = user\update password: @params.password
-                    if errorMsg
-                        return errorMsg
-                else
-                    return "Invalid password."
-
             if current_user.admin
                 if @params.delete
                     if user\delete!
@@ -96,6 +87,17 @@ class UsersApp extends lapis.Application
                 user, errorMsg = user\update columns
                 if errorMsg
                     return errorMsg
+                else
+                    redirect_to: @url_for("user", name: user.name)
+
+            if user.id == current_user.id
+                print("ENTER")
+                if user.password == @params.oldpassword
+                    user, errorMsg = user\update password: @params.password
+                    if errorMsg
+                        return errorMsg
+                else
+                    return "Invalid password."
 
             redirect_to: @url_for("user", name: user.name)
     }
