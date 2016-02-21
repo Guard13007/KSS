@@ -66,38 +66,38 @@ class UsersApp extends lapis.Application
             current_user = Users\find name: @session.username
             user = Users\find id: @params.user_id
 
-            if current_user.admin
-                if @params.delete
-                    if user\delete!
-                        return "User deleted."
+            if @params.form == "user_edit"
+                if user.id == current_user.id
+                    print("ENTER")
+                    if user.password == @params.oldpassword
+                        user, errorMsg = user\update password: @params.password
+                        if errorMsg
+                            return errorMsg
                     else
-                        return "Error deleting user."
+                        return "Invalid password."
 
-                columns = {} -- columns to update
-                if @params.name != ""
-                    columns.name = @params.name
-                if @params.weekday != ""
-                    columns.weekday = @params.weekday
-                if @params.admin
-                    if @params.admin == "on"
-                        columns.admin = true
-                    else
-                        columns.admin = false
+            if @params.form == "admin_edit"
+                if current_user.admin
+                    if @params.delete
+                        if user\delete!
+                            return "User deleted."
+                        else
+                            return "Error deleting user."
 
-                user, errorMsg = user\update columns
-                if errorMsg
-                    return errorMsg
-                else
-                    redirect_to: @url_for("user", name: user.name)
+                    columns = {} -- columns to update
+                    if @params.name != ""
+                        columns.name = @params.name
+                    if @params.weekday != ""
+                        columns.weekday = @params.weekday
+                    if @params.admin
+                        if @params.admin == "on"
+                            columns.admin = true
+                        else
+                            columns.admin = false
 
-            if user.id == current_user.id
-                print("ENTER")
-                if user.password == @params.oldpassword
-                    user, errorMsg = user\update password: @params.password
+                    user, errorMsg = user\update columns
                     if errorMsg
                         return errorMsg
-                else
-                    return "Invalid password."
 
             redirect_to: @url_for("user", name: user.name)
     }
