@@ -72,13 +72,28 @@ class UsersApp extends lapis.Application
                     return "Invalid password."
 
             if current_user.admin
-                require("moon").p @params
-                    --TODO figure out how to process these properly:
-                    --input type: "text", name: "name"
-                    --input type: "number", name: "weekday"
-                    --input type: "checkbox", name: "admin"
-                    --input type: "checkbox", name: "delete"
-                    --input type: "hidden", name: "user_id", value: @user.id
+                if @params.delete
+                    if user\delete!
+                        return "User deleted."
+                    else
+                        return "Error deleting user."
+
+                local columns -- columns to update
+                if @params.name != ""
+                    columns.name = @params.name
+                if @params.weekday != ""
+                    columns.weekday = @params.weekday
+                if @params.admin
+                    if @params.admin == "on"
+                        columns.admin = true
+                    else
+                        columns.admin = false
+
+                user, errorMsg = user\update columns
+                if errorMsg
+                    return errorMsg
+
+            redirect_to @url_for("user", name: user.name)
     }
 
     [login: "/login"]: respond_to {
