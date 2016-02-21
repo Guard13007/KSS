@@ -9,7 +9,11 @@ class UsersApp extends lapis.Application
     "/user": => redirect_to: @url_for("users"), status: 301
 
     [users: "/users"]: =>
-        @users = Users\select "ORDER BY name ASC"
+        @users = {
+            admins: Users\select "WHERE admin = TRUE, ORDER BY name ASC"
+            active: Users\select "WHERE weekday != 0, ORDER BY name ASC"
+            inactive: Users\select "WHERE weekday = 0, ORDER BY name ASC"
+        }
         @title = "All Users"
         render: true
 
