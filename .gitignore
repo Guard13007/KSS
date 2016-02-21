@@ -1,6 +1,8 @@
 *.lua
 *_temp/
 logs/
-static/uploads/
+!static/uploads
+static/uploads/*
+!static/uploads/.nomedia
 nginx.conf.compiled
 secret.moon
