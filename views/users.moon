@@ -13,7 +13,7 @@ class UsersWidget extends Widget
                     for i in ipairs @users
                         tr ->
                             td -> a href: @url_for("user", name: @users[i].name), @users[i].name
-                            td -> get_day @users[i].weekday
+                            td -> text get_day @users[i].weekday
                 else
                     tr ->
                         td "None"
