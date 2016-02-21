@@ -89,7 +89,7 @@ class UsersApp extends lapis.Application
                     else
                         columns.admin = false
 
-                user, errorMsg = user\update columns
+                user, errorMsg = user\update(columns)
                 if errorMsg
                     return errorMsg
 
