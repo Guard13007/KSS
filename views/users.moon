@@ -16,7 +16,7 @@ class UsersWidget extends Widget
                     th "Weekday"
                     th "Name"
             tbody ->
-                count = max #@users.admins #@users.active #@users.inactive
+                count = max #@users.admins, #@users.active, #@users.inactive
                 for i = 1, count
                     tr ->
                         if @users.admins[i]

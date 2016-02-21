@@ -43,7 +43,7 @@ class UserWidget extends Widget
                     class: "pure-form"
                 }, ->
                     p "Rename:"
-                    input type: "text", name: "name", defaultValue: @user.name
+                    input type: "text", name: "name", defaultValue: @user.name --NOTE defaultValue doesn't seem to actually do anything
                     p "Weekday (0-7):" --TODO consider changing to a dropdown menu selection
                     input type: "number", name: "weekday", value: @user.weekday
                     p "Admin? "
