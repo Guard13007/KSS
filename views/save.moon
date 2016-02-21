@@ -5,4 +5,4 @@ class SaveWidget extends Widget
         pre @save.report
         hr!
         p "Created by: ", (@save\get_user!).name --NOTE should be valid, but not sure
-        p -> a href: @build_url(@save.file), "Download" --TODO make file ext available here
+        p -> a href: @build_url(@save.file), download: true, "Download" --TODO make file ext available here
