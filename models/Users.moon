@@ -27,6 +27,10 @@ class Users extends Model
         weekday: (value) =>
             value = 0 unless value -- enforce defaulting to zero
 
+            value = tonumber value --fixes accidentally using a string that would otherwise be valid
+            if value == nil
+                return "Please enter a valid number."
+
             if (value > 7) or (value < 0)
                 return "Weekday must be 0 to 7. 0 disables a user from uploading, 1-7 represents Sunday through Saturday."
     }
