@@ -78,7 +78,7 @@ class UsersApp extends lapis.Application
                     else
                         return "Error deleting user."
 
-                local columns = {} -- columns to update
+                columns = {} -- columns to update
                 if @params.name != ""
                     columns.name = @params.name
                 if @params.weekday != ""
@@ -89,7 +89,7 @@ class UsersApp extends lapis.Application
                     else
                         columns.admin = false
 
-                user, errorMsg = user\update(columns)
+                user, errorMsg = user\update columns
                 if errorMsg
                     return errorMsg
 
