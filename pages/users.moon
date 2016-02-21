@@ -65,7 +65,9 @@ class UsersApp extends lapis.Application
             if user.id == current_user.id
                 print("ENTER")
                 if user.password == @params.oldpassword
-                    require("moon").p user\update password: "" --should print any return values, right?
+                    user, errorMsg = user\update password: @params.password
+                    if errorMsg
+                        return errorMsg
                 else
                     return "Invalid password."
 
