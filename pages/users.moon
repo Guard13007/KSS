@@ -93,7 +93,7 @@ class UsersApp extends lapis.Application
                 if errorMsg
                     return errorMsg
 
-            redirect_to @url_for("user", name: user.name)
+            redirect_to: @url_for("user", name: user.name)
     }
 
     [login: "/login"]: respond_to {
