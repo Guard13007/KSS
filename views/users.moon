@@ -8,7 +8,7 @@ class UsersWidget extends Widget
             thead ->
                 tr ->
                     th "Administrators"
-                    th "Active Users", colspan: 2
+                    th colspan: 2, "Active Users"
                     th "Inactive Users"
                 tr ->
                     th "Name"
