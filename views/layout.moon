@@ -53,6 +53,9 @@ class Layout extends Widget
                             h2 @subtitle if @subtitle --TODO test (this should only render a subtitle if there is one)
                         div class: "content", ->
                             @content_for "inner"
-                            --h2 class: "content-subhead", "Some sub-header"
-                            --p "Some long string of test, like a paragraph or something. Honestly, this is where @content_for should go, but I'm putting temporary bullshit here."
+                    div id: "footer", ->
+                        hr!
+                        a href: "https://github.com/Guard13007/KSS", target="_blank", "Source"
+                        text " | "
+                        a href: "https://github.com/Guard13007/KSS/issues", target="_blank", "Issues"
                 script src: @build_url "static/js/ui.js"
