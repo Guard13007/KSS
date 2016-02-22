@@ -29,7 +29,11 @@ class Layout extends Widget
                                 p "Current user:", br, user.name
                             else
                                 p "Current user:", br, "N/A"
-                            p "Time remaining:", br, "TIME" --TODO end of today - current time
+                            tomorrow_time = os.date("!*t")
+                            tomorrow_time.hour = 0
+                            tomorrow_time.min = 0
+                            tomorrow_time.second = 0
+                            p "Time remaining:", br, time_ago_in_words(os.time(tomorrow_time)) --no idea if this will work, probably won't
                             tomorrow = day + 1
                             if tomorrow == 8
                                 tomorrow = 1
