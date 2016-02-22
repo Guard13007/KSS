@@ -30,7 +30,10 @@ class Layout extends Widget
                             else
                                 p "Current user:", br, "N/A"
                             p "Time remaining:", br, "TIME" --TODO end of today - current time
-                            user = Users\find weekday: (day + 1)%8+1 --tomorrow!
+                            tomorrow = day + 1
+                            if tomorrow == 8
+                                tomorrow = 1
+                            user = Users\find weekday: tomorrow
                             if user
                                 p "Next user:", br, user.name
                             else
@@ -50,7 +53,7 @@ class Layout extends Widget
                     div id: "main", ->
                         div class: "header", ->
                             h1 @title or "Kerbal Save Sharing"
-                            h2 @subtitle if @subtitle --TODO test (this should only render a subtitle if there is one)
+                            h2 @subtitle if @subtitle
                         div class: "content", ->
                             @content_for "inner"
                     div id: "footer", ->
