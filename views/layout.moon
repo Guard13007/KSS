@@ -33,7 +33,10 @@ class Layout extends Widget
                             tomorrow_time.hour = 0
                             tomorrow_time.min = 0
                             tomorrow_time.second = 0
-                            p "Time remaining:", br, time_ago_in_words(os.time(tomorrow_time)) --no idea if this will work, probably won't
+                            p ->
+                                text "Time remaining:"
+                                br!
+                                text time_ago_in_words os.time tomorrow_time --no idea if this will work, probably won't
                             tomorrow = day + 1
                             if tomorrow == 8
                                 tomorrow = 1
@@ -62,7 +65,7 @@ class Layout extends Widget
                             @content_for "inner"
                     div id: "footer", ->
                         hr!
-                        a href: "https://github.com/Guard13007/KSS", target="_blank", "Source"
+                        a href: "https://github.com/Guard13007/KSS", target: "_blank", "Source"
                         text " | "
-                        a href: "https://github.com/Guard13007/KSS/issues", target="_blank", "Issues"
+                        a href: "https://github.com/Guard13007/KSS/issues", target: "_blank", "Issues"
                 script src: @build_url "static/js/ui.js"

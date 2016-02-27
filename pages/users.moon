@@ -12,7 +12,7 @@ class UsersApp extends lapis.Application
     [users: "/users"]: =>
         @users = {
             admins: Users\select "WHERE admin = TRUE ORDER BY name ASC"
-            active: Users\select "WHERE weekday != 0 ORDER BY weekday ASC ORDER BY name ASC"
+            active: Users\select "WHERE weekday != 0 ORDER BY weekday, name ASC"
             inactive: Users\select "WHERE weekday = 0 ORDER BY name ASC"
         }
         @title = "All Users"
