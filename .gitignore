@@ -1,5 +1,6 @@
 *.lua
 *_temp/
+ssl/
 logs/
 !static/uploads
 static/uploads/*
