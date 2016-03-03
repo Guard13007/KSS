@@ -35,10 +35,13 @@ class Layout extends Widget
                             tomorrow_time.min = 0
                             tomorrow_time.sec = 0
                             tomorrow_in_seconds = os.time(tomorrow_time)
+                            time_diff = tomorrow_in_seconds + 24*60*60 - os.time(os.date("!*t")) -- tomorrow_in_seconds is actually today
+                            mins = tomorrow_in_seconds/60
+                            hours = math.floor mins
                             p ->
                                 text "Time remaining:"
                                 br!
-                                text tomorrow_in_seconds + 24*60*60 - os.time(os.date("!*t")) -- tomorrow_in_seconds is actually today
+                                text "#{hours}:#{mins} remaining"
                                 --text time_ago_in_words os.time tomorrow_time --no idea if this will work, probably won't
                             tomorrow = day + 1
                             if tomorrow == 8
