@@ -48,15 +48,12 @@ class UserWidget extends Widget
                     p "Weekday:"
                     --input type: "number", name: "weekday", value: @user.weekday
                     element "select", name: "weekday", ->
-                        option value: 0, "Unassigned"
-                        option value: 1, "Sunday"
-                        option value: 2, "Monday"
-                        option value: 3, "Tuesday"
-                        option value: 4, "Wednesday"
-                        option value: 5, "Thursday"
-                        option value: 6, "Friday"
-                        option value: 7, "Saturday"
-                        option value: @user.weekday, selected: true, get_day @user.weekday --NOTE THIS IS TERRIBLE
+                        for day = 0, 7
+                            if @user.weekday == day
+                                option value: day, selected: true, get_day day
+                            else
+                                option value: day, get_day day
+                        --option value: @user.weekday, selected: true, get_day @user.weekday --NOTE THIS IS TERRIBLE
                     p "Admin? "
                     if @user.admin
                         input type: "checkbox", name: "admin", checked: true
