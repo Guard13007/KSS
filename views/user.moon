@@ -34,14 +34,16 @@ class UserWidget extends Widget
                     input type: "hidden", name: "csrf_token", value: @token
                     input type: "submit"
 
-            if current_user.admin and
+            if current_user.admin --and      what the FUCK was this unknown and doing here?!
                 hr!
+                script src: @build_url "static/js/form.js"
                 h2 "Admin Panel"
                 form {
                     action: "/modify_user"
                     method: "POST"
                     enctype: "multipart/form-data"
                     class: "pure-form"
+                    onsubmit: "return confirm_delete('Are you sure you want to delete this user?');"
                 }, ->
                     p "Rename:"
                     input type: "text", name: "name", defaultValue: @user.name --NOTE defaultValue doesn't seem to actually do anything
