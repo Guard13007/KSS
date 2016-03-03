@@ -1,4 +1,5 @@
 import Model from require "lapis.db.model"
+import trim from require "helpers"
 
 class Users extends Model
     @timestamp: true
@@ -7,15 +8,21 @@ class Users extends Model
 
     @constraints: {
         name: (value) =>
-            --TODO usernames cannot end with a space! add this constraint
-            --TODO add no / constraint
             --TODO honestly, I should just allow letters, numbers, and _ and - ONLY...
+
+            if value\find "/"
+                return "Usernames cannot have a / in them."
+
+            -- block these?  ?=#
 
             if not value
                 return "You must have a username."
 
             if Users\find name: value
                 return "That username is already taken."
+
+            if value != trim value
+                return "Usernames must not start or end with spaces."
 
             lower = value\lower!
             if (lower == "admin") or (lower == "administrator") or (lower == "new")

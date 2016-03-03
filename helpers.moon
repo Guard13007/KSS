@@ -19,4 +19,10 @@ get_day = (day) ->
         else
             error("User \"#{@user.name}\" (ID: \"#{@user.id}\") has invalid weekday.") -- this will break when @user isn't defined...
 
-return { :get_day }
+gmt_time = () ->
+    return os.time(os.date("!*t"))
+
+trim = (s) ->
+    return s\match '^()%s*$' and '' or s\match '^%s*(.*%S)'
+
+return { :get_day, :gmt_time, :trim }
