@@ -20,10 +20,11 @@ class SaveWidget extends Widget
                         method: "POST"
                         enctype: "multipart/form-data"
                         class: "pure-form"
+                        onsubmit: "return confirm_delete('Are you sure you want to delete this save?');"
                     }, ->
                         p "Delete save? "
                         input type: "checkbox", name: "delete"
                         input type: "hidden", name: "save_id", value: @save.id
                         br!
                         input type: "hidden", name: "csrf_token", value: @token
-                        input type: "submit", onsubmit: "return confirm_delete('Are you sure you want to delete this save?');"
+                        input type: "submit"
