@@ -47,7 +47,7 @@ class UserWidget extends Widget
                     input type: "text", name: "name", defaultValue: @user.name --NOTE defaultValue doesn't seem to actually do anything
                     p "Weekday:"
                     --input type: "number", name: "weekday", value: @user.weekday
-                    select name: "weekday", ->
+                    element "select", name: "weekday", ->
                         option value: 0, "Unassigned"
                         option value: 1, "Sunday"
                         option value: 2, "Monday"
