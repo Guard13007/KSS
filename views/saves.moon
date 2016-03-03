@@ -13,7 +13,6 @@ class SavesWidget extends Widget
                     th "Info/Mission Report"
             tbody ->
                 if #@saves > 0
-                    require("moon").p @saves --TODO figure out why this is here
                     for id in ipairs @saves
                         tr ->
                             td @saves[id].created_at

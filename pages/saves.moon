@@ -10,7 +10,7 @@ class SavesApp extends lapis.Application
     "/save": => redirect_to: @url_for("saves"), status: 301
 
     [saves: "/saves"]: =>
-        @saves = Saves\select!
+        @saves = Saves\select "ORDER BY created_at DESC"
         @title = "All Saves"
         render: true
 

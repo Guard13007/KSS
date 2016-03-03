@@ -7,6 +7,10 @@ class Users extends Model
 
     @constraints: {
         name: (value) =>
+            --TODO usernames cannot end with a space! add this constraint
+            --TODO add no / constraint
+            --TODO honestly, I should just allow letters, numbers, and _ and - ONLY...
+
             if not value
                 return "You must have a username."
 
