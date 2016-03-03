@@ -18,7 +18,7 @@ class SavesApp extends lapis.Application
         @save = Saves\find id: @params.id
 
         if not @save
-            @title "Save Not Found"
+            @title = "Save Not Found"
             return status: 404, "Not found."
 
         @token = csrf.generate_token @
