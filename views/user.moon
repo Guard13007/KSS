@@ -45,8 +45,18 @@ class UserWidget extends Widget
                 }, ->
                     p "Rename:"
                     input type: "text", name: "name", defaultValue: @user.name --NOTE defaultValue doesn't seem to actually do anything
-                    p "Weekday (0-7):" --TODO consider changing to a dropdown menu selection
-                    input type: "number", name: "weekday", value: @user.weekday
+                    p "Weekday:"
+                    --input type: "number", name: "weekday", value: @user.weekday
+                    select name: "weekday", ->
+                        option value: 0, "Unassigned"
+                        option value: 1, "Sunday"
+                        option value: 2, "Monday"
+                        option value: 3, "Tuesday"
+                        option value: 4, "Wednesday"
+                        option value: 5, "Thursday"
+                        option value: 6, "Friday"
+                        option value: 7, "Saturday"
+                        option value: @user.weekday, selected: true, get_day @user.weekday --NOTE THIS IS TERRIBLE
                     p "Admin? "
                     if @user.admin
                         input type: "checkbox", name: "admin", checked: true
