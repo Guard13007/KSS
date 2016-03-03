@@ -82,7 +82,6 @@ class UsersApp extends lapis.Application
 
             if @params.form == "admin_edit"
                 if current_user.admin
-                    require("moon").p @params.form
                     if @params.delete
                         if user\delete!
                             return "User deleted."

@@ -53,7 +53,6 @@ class UserWidget extends Widget
                                 option value: day, selected: true, get_day day
                             else
                                 option value: day, get_day day
-                        --option value: @user.weekday, selected: true, get_day @user.weekday --NOTE THIS IS TERRIBLE
                     p "Admin? "
                     if @user.admin
                         input type: "checkbox", name: "admin", checked: true
