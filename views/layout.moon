@@ -30,13 +30,16 @@ class Layout extends Widget
                             else
                                 p "Current user:", br, "N/A"
                             tomorrow_time = os.date("!*t")
+                            require("moon").p tomorrow_time --NOTE tmp for testing
                             tomorrow_time.hour = 0
                             tomorrow_time.min = 0
-                            tomorrow_time.second = 0
+                            tomorrow_time.sec = 0
+                            tomorrow_in_seconds = os.time(tomorrow_time)
                             p ->
                                 text "Time remaining:"
                                 br!
-                                text time_ago_in_words os.time tomorrow_time --no idea if this will work, probably won't
+                                text tomorrow_in_seconds - os.time()
+                                --text time_ago_in_words os.time tomorrow_time --no idea if this will work, probably won't
                             tomorrow = day + 1
                             if tomorrow == 8
                                 tomorrow = 1
