@@ -29,8 +29,18 @@ class Layout extends Widget
                                 p "Current user:", br, user.name
                             else
                                 p "Current user:", br, "N/A"
-                            p "Time remaining:", br, "TIME" --TODO end of today - current time
-                            user = Users\find weekday: (day + 1)%8+1 --tomorrow!
+                            tomorrow_time = os.date("!*t")
+                            tomorrow_time.hour = 0
+                            tomorrow_time.min = 0
+                            tomorrow_time.second = 0
+                            p ->
+                                text "Time remaining:"
+                                br!
+                                text time_ago_in_words os.time tomorrow_time --no idea if this will work, probably won't
+                            tomorrow = day + 1
+                            if tomorrow == 8
+                                tomorrow = 1
+                            user = Users\find weekday: tomorrow
                             if user
                                 p "Next user:", br, user.name
                             else
@@ -50,9 +60,12 @@ class Layout extends Widget
                     div id: "main", ->
                         div class: "header", ->
                             h1 @title or "Kerbal Save Sharing"
-                            h2 @subtitle if @subtitle --TODO test (this should only render a subtitle if there is one)
+                            h2 @subtitle if @subtitle
                         div class: "content", ->
                             @content_for "inner"
-                            --h2 class: "content-subhead", "Some sub-header"
-                            --p "Some long string of test, like a paragraph or something. Honestly, this is where @content_for should go, but I'm putting temporary bullshit here."
+                    div id: "footer", ->
+                        hr!
+                        a href: "https://github.com/Guard13007/KSS", target: "_blank", "Source"
+                        text " | "
+                        a href: "https://github.com/Guard13007/KSS/issues", target: "_blank", "Issues"
                 script src: @build_url "static/js/ui.js"

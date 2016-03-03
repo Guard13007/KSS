@@ -4,6 +4,7 @@ csrf = require "lapis.csrf"
 Users = require "models.Users"
 
 import respond_to from require "lapis.application"
+import unescape from require "lapis.util"
 
 class UsersApp extends lapis.Application
     "/user": => redirect_to: @url_for("users"), status: 301
@@ -11,14 +12,14 @@ class UsersApp extends lapis.Application
     [users: "/users"]: =>
         @users = {
             admins: Users\select "WHERE admin = TRUE ORDER BY name ASC"
-            active: Users\select "WHERE weekday != 0 ORDER BY weekday ASC"
+            active: Users\select "WHERE weekday != 0 ORDER BY weekday, name ASC"
             inactive: Users\select "WHERE weekday = 0 ORDER BY name ASC"
         }
         @title = "All Users"
         render: true
 
     [user: "/user/:name"]: =>
-        @user = Users\find name: @params.name
+        @user = Users\find name: unescape(@params.name)
 
         if not @user
             @title = "User Not Found"
