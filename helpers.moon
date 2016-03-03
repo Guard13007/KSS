@@ -17,6 +17,6 @@ get_day = (day) ->
         when 7
             return "Saturday"
         else
-            error("User \"#{@user.name}\" (ID: \"#{@user.id}\") has invalid weekday.")
+            error("User \"#{@user.name}\" (ID: \"#{@user.id}\") has invalid weekday.") -- this will break when @user isn't defined...
 
 return { :get_day }
