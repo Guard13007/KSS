@@ -35,8 +35,8 @@ class SavesApp extends lapis.Application
             -- TODO the first 3 if's should go into a is_admin function
             -- specifically user = is_admin! (returns nil or the user if they are admin)
             --  so use is "if user = is_admin!", and then do whatever if they are an admin
-            if @session.username
-                if user = Users\find name: @session.username
+            if @session.id
+                if user = Users\find id: @session.id
                     if user.admin
                         if @params.delete == "on"
                             if save = Saves\find id: @params.save_id

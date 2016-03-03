@@ -25,12 +25,12 @@ class UploadApp extends lapis.Application
 
             @title = "Error" --redirects on success, so this will only apply to an error
 
-            if not @session.username
+            if not @session.id
                 return "You must be logged in to upload a file."
 
             -- is the user allowed to upload now?
             day = os.date("!*t").wday
-            user = Users\find name: @session.username
+            user = Users\find id: @session.id
             if not (user.weekday == day) and (not user.admin) --if not their day and not admin
                 return "You are not allowed to upload today. Please check the schedule."
 

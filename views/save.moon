@@ -11,8 +11,8 @@ class SaveWidget extends Widget
         p "Created by: ", (@save\get_user!).name
         p -> a href: @build_url(@save.file), download: true, "Download" --TODO make file ext available here
 
-        if @session.username
-            if user = Users\find name: @session.username
+        if @session.id
+            if user = Users\find id: @session.id
                 if user.admin
                     hr!
                     form {

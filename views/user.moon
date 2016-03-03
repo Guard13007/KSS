@@ -13,8 +13,8 @@ class UserWidget extends Widget
             hr!
         p "Created at: ", @user.created_at
         p "Last updated at: ", @user.updated_at
-        if @session.username
-            current_user = Users\find name: @session.username
+        if @session.id
+            current_user = Users\find id: @session.id
             if @user.name == current_user.name
                 hr!
                 h2 "Change Password?"

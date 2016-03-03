@@ -47,9 +47,9 @@ class Layout extends Widget
                                 p "Next user:", br, "N/A"
                             hr!
                             ul class: "pure-menu-list", ->
-                                if @session.username
+                                if @session.id
                                     li class: "pure-menu-item", -> a href: @url_for("logout"), class: "pure-menu-link", "Log Out"
-                                    user = Users\find name: @session.username
+                                    user = Users\find id: @session.id
                                     if (user.weekday == day) or user.admin
                                         li class: "pure-menu-item", -> a href: @url_for("upload"), class: "pure-menu-link", "Upload"
                                 else

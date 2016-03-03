@@ -32,8 +32,11 @@ class UsersApp extends lapis.Application
 
     [create_user: "/create_user"]: respond_to {
         GET: =>
-            if @session.username
-                return "You are logged in as #{@session.username}. Please log out before attempting to create a new account."
+            if @session.id
+                if user = Users\find id: @session.id
+                    return "You are logged in as #{user.name}. Please log out before attempting to create a new account."
+                else
+                    return "Error: Session ID is invalid. Please report this error." --TODO have an error report in the error itself? Or make the error report itself dammit
             else
                 @token = csrf.generate_token @
                 @title = "Create Account"
@@ -52,7 +55,7 @@ class UsersApp extends lapis.Application
             --TODO modify stack trace output to include note to email me the error ?!
 
             if user
-                @session.username = user.name -- log them in
+                @session.id = user.id -- log them in
                 redirect_to: @url_for "user", name: user.name --TODO redirect somewhere else
             else
                 return errorMsg
@@ -64,7 +67,7 @@ class UsersApp extends lapis.Application
         POST: =>
             csrf.assert_token @
 
-            current_user = Users\find name: @session.username
+            current_user = Users\find id: @session.id
             user = Users\find id: @params.user_id
 
             if @params.form == "user_edit"
@@ -105,8 +108,11 @@ class UsersApp extends lapis.Application
 
     [login: "/login"]: respond_to {
         GET: =>
-            if @session.username
-                return "You are logged in as #{@session.username}. Please log out before attempting to log in as another user."
+            if @session.id
+                if user = Users\find id: @session.id
+                    return "You are logged in as #{@session.username}. Please log out before attempting to log in as another user."
+                else
+                    return "Error: Session ID is invalid. Please report this error." --TODO have errors like this report themselves?
             else
                 @token = csrf.generate_token @
                 @title = "Log In"
@@ -116,12 +122,12 @@ class UsersApp extends lapis.Application
 
             if user = Users\find name: @params.name
                 if user.password == @params.password
-                    @session.username = user.name
+                    @session.id = user.id
                     return redirect_to: @url_for "user", name: user.name --TODO redirect somewhere else
 
             return "Invalid login information."
     }
 
     [logout: "/logout"]: =>
-        @session.username = nil --this should be all that is needed to log out
+        @session.id = nil --this should be all that is needed to log out
         redirect_to: @url_for("index")
