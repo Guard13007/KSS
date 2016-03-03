@@ -1,9 +1,14 @@
 *.lua
 *_temp/
-ssl/
 logs/
+
+!ssl
+ssl/*
+!ssl/.nocertificate
+
 !static/uploads
 static/uploads/*
 !static/uploads/.nomedia
+
 nginx.conf.compiled
 secret.moon
