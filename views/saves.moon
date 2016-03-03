@@ -13,13 +13,13 @@ class SavesWidget extends Widget
                     th "Info/Mission Report"
             tbody ->
                 if #@saves > 0
-                    for id in ipairs @saves
+                    for save in ipairs @saves
                         tr ->
-                            td @saves[id].created_at
-                            user = Users\find id: @saves[id].user_id --NOTE probably massively inefficient, lots of queries!!
+                            td @saves[save].created_at
+                            user = Users\find id: @saves[save].user_id --NOTE probably massively inefficient, lots of queries!!
                             td -> a href: @url_for("user", name: user.name), user.name
-                            td -> a href: @build_url(@saves[id].file), target: "_blank", download: true, "Download"
-                            td -> a href: @url_for("save", id: id), "Info/Mission Report"
+                            td -> a href: @build_url(@saves[save].file), target: "_blank", download: true, "Download"
+                            td -> a href: @url_for("save", id: @saves[save].id), "Info/Mission Report"
                 else
                     tr ->
                         td "None"
