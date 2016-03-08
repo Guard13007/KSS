@@ -24,7 +24,7 @@ class XSSApp extends lapis.Application
     }
 
     [xss2: "/vulnerable/x/:id"]: =>
-        @value = XSS\find value: @params.id
+        @value = XSS\find id: @params.id
         @title = "XSS Vulnerability?"
         @subtitle = @value.value
         render: true
