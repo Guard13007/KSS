@@ -13,16 +13,27 @@ class CreateXSS extends Widget
             br!
             input type: "submit"
 
-        p, ->
-            a href: "https://dev.kerbalwarfare.xyz/attrib-event/1", "attrib-event"
-            a href: "https://dev.kerbalwarfare.xyz/attrib-name/1", "attrib-name"
-            a href: "https://dev.kerbalwarfare.xyz/attrib-value/1", "attrib-value"
-            a href: "https://dev.kerbalwarfare.xyz/comment/1", "comment"
-            a href: "https://dev.kerbalwarfare.xyz/css/1", "css"
-            a href: "https://dev.kerbalwarfare.xyz/script/1", "script"
-            a href: "https://dev.kerbalwarfare.xyz/tag-inside/1", "tag-inside"
-            a href: "https://dev.kerbalwarfare.xyz/tag-name/1", "tag-name"
-            a href: "https://dev.kerbalwarfare.xyz/url1/1", "url1"
-            a href: "https://dev.kerbalwarfare.xyz/url2/1", "url2"
-            a href: "https://dev.kerbalwarfare.xyz/url3/1", "url3"
-            a href: "https://dev.kerbalwarfare.xyz/url4/1", "url4"
+        p ->
+            a href: "https://dev.kerbalwarfare.xyz/vulnerable/attrib-event/1", "attrib-event"
+            br!
+            a href: "https://dev.kerbalwarfare.xyz/vulnerable/attrib-name/1", "attrib-name"
+            br!
+            a href: "https://dev.kerbalwarfare.xyz/vulnerable/attrib-value/1", "attrib-value"
+            br!
+            a href: "https://dev.kerbalwarfare.xyz/vulnerable/comment/1", "comment"
+            br!
+            a href: "https://dev.kerbalwarfare.xyz/vulnerable/css/1", "css"
+            br!
+            a href: "https://dev.kerbalwarfare.xyz/vulnerable/script/1", "script"
+            br!
+            a href: "https://dev.kerbalwarfare.xyz/vulnerable/tag-inside/1", "tag-inside"
+            br!
+            a href: "https://dev.kerbalwarfare.xyz/vulnerable/tag-name/1", "tag-name"
+            br!
+            a href: "https://dev.kerbalwarfare.xyz/vulnerable/url1/1", "url1"
+            br!
+            a href: "https://dev.kerbalwarfare.xyz/vulnerable/url2/1", "url2"
+            br!
+            a href: "https://dev.kerbalwarfare.xyz/vulnerable/url3/1", "url3"
+            br!
+            a href: "https://dev.kerbalwarfare.xyz/vulnerable/url4/1", "url4"
