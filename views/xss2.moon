@@ -6,13 +6,13 @@ class XSS2 extends Widget
         p @value.value
         p "In a script tag: "
         script, ->
-            "var i = #{@value.value};"
+            "var i = \"#{@value.value}\";"
         p "In an attribute name: "
         p [@value.value]: "data", "This is hacked?"
         p "In an attribute's value: "
         p data: @value.value, "This is not hacked?"
         p "In an event handling attribute: "
-        p onmouseover: "var i = #{@value.value};", "Hover over me."
+        p onmouseover: "var i = \"#{@value.value}\";", "Hover over me."
         p "Inside CSS: "
         style, ->
             @value.value
