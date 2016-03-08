@@ -1,7 +1,7 @@
 import Widget from require "lapis.html"
 
 XSS = require "models.XSS"
-count = XSS\count!
+count = 114 --XSS\count! --TODO figure out why count fails
 
 class CreateXSS extends Widget
     content: =>
