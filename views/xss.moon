@@ -1,5 +1,8 @@
 import Widget from require "lapis.html"
 
+XSS = require "models.XSS"
+count = XSS\count!
+
 class CreateXSS extends Widget
     content: =>
         form {
@@ -13,27 +16,18 @@ class CreateXSS extends Widget
             br!
             input type: "submit"
 
-        p ->
-            a href: "https://dev.kerbalwarfare.xyz/vulnerable/attrib-event/1", "attrib-event"
-            br!
-            a href: "https://dev.kerbalwarfare.xyz/vulnerable/attrib-name/1", "attrib-name"
-            br!
-            a href: "https://dev.kerbalwarfare.xyz/vulnerable/attrib-value/1", "attrib-value"
-            br!
-            a href: "https://dev.kerbalwarfare.xyz/vulnerable/comment/1", "comment"
-            br!
-            a href: "https://dev.kerbalwarfare.xyz/vulnerable/css/1", "css"
-            br!
-            a href: "https://dev.kerbalwarfare.xyz/vulnerable/script/1", "script"
-            br!
-            a href: "https://dev.kerbalwarfare.xyz/vulnerable/tag-inside/1", "tag-inside"
-            br!
-            a href: "https://dev.kerbalwarfare.xyz/vulnerable/tag-name/1", "tag-name"
-            br!
-            a href: "https://dev.kerbalwarfare.xyz/vulnerable/url1/1", "url1"
-            br!
-            a href: "https://dev.kerbalwarfare.xyz/vulnerable/url2/1", "url2"
-            br!
-            a href: "https://dev.kerbalwarfare.xyz/vulnerable/url3/1", "url3"
-            br!
-            a href: "https://dev.kerbalwarfare.xyz/vulnerable/url4/1", "url4"
+        element "table", class: "pure-table", ->
+            for i = 1, count
+                tr ->
+                    td -> a href: "https://dev.kerbalwarfare.xyz/vulnerable/attrib-event/#{i}", "attrib-event #{i}"
+                    td -> a href: "https://dev.kerbalwarfare.xyz/vulnerable/attrib-name/#{i}", "attrib-name #{i}"
+                    td -> a href: "https://dev.kerbalwarfare.xyz/vulnerable/attrib-value/#{i}", "attrib-value #{i}"
+                    td -> a href: "https://dev.kerbalwarfare.xyz/vulnerable/comment/#{i}", "comment #{i}"
+                    td -> a href: "https://dev.kerbalwarfare.xyz/vulnerable/css/#{i}", "css #{i}"
+                    td -> a href: "https://dev.kerbalwarfare.xyz/vulnerable/script/#{i}", "script #{i}"
+                    td -> a href: "https://dev.kerbalwarfare.xyz/vulnerable/tag-inside/#{i}", "tag-inside #{i}"
+                    td -> a href: "https://dev.kerbalwarfare.xyz/vulnerable/tag-name/#{i}", "tag-name #{i}"
+                    td -> a href: "https://dev.kerbalwarfare.xyz/vulnerable/url1/#{i}", "url1 #{i}"
+                    td -> a href: "https://dev.kerbalwarfare.xyz/vulnerable/url2/#{i}", "url2 #{i}"
+                    td -> a href: "https://dev.kerbalwarfare.xyz/vulnerable/url3/#{i}", "url3 #{i}"
+                    td -> a href: "https://dev.kerbalwarfare.xyz/vulnerable/url4/#{i}", "url4 #{i}"
