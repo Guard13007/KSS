@@ -23,11 +23,13 @@ class XSSApp extends lapis.Application
                 redirect_to: @url_for "xss"
     }
 
-    [xss2: "/vulnerable/x/:id"]: =>
+    --[xss2: "/vulnerable/x/:id"]: =>
+    "/vulnerable/:x/:id": => --no idea if that will work properly...
         @value = XSS\find id: @params.id
         @title = "XSS Vulnerability?"
         @subtitle = @value.value
-        render: true
+        --render: true
+        render: @params.x
 
     [vulnerable: "/vulnerable/:user"]: =>
         if user = Users\find name: @params.user
