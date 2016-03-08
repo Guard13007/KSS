@@ -131,7 +131,3 @@ class UsersApp extends lapis.Application
     [logout: "/logout"]: =>
         @session.id = nil --this should be all that is needed to log out
         redirect_to: @url_for("index")
-
-    [vulnerable: "/vulnerable/:user"]: =>
-        if user = Users\find name: @params.user
-            return p onmouseover: "var useless = \"#{user.name}\";", "This piece of text is potentially vulnerable to XSS. DO NOT MOVE YOUR MOUSE OVER THIS TEXT." --NOTE example of XSS vulnerability for testing purposes!

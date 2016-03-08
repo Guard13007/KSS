@@ -35,4 +35,9 @@ db = require "lapis.db"
         assert db.query db.raw "INSERT INTO \"users\" (\"password\", \"updated_at\", \"created_at\", \"name\") VALUES ('changeme', '2016-02-19 05:12:32', '2016-02-19 05:12:32', 'admin') RETURNING \"id\""
     [5]: =>
         assert db.query db.raw "UPDATE \"users\" SET admin=TRUE WHERE name='admin'"
+    [6]: =>
+        create_table "xss", {
+            {"id", types.serial primary_key: true}
+            {"value", types.text unique: true}
+        }
 }
