@@ -3,7 +3,7 @@ csrf = require "lapis.csrf"
 
 Users = require "models.Users"
 
-import respond_to from require "lapis.application"
+import respond_to, assert_error from require "lapis.application"
 import unescape from require "lapis.util"
 
 class UsersApp extends lapis.Application
@@ -44,18 +44,15 @@ class UsersApp extends lapis.Application
             unless csrf.validate_token @
                 return "Invalid token. Please try again."
 
-            user, errorMsg = Users\create {
+            user = assert_error Users\create {
                 name: @params.name
                 password: @params.password
             }
 
             --TODO modify stack trace output to include note to email me the error ?!
 
-            if user
-                @session.id = user.id -- log them in
-                redirect_to: @url_for user --TODO redirect somewhere else
-            else
-                return errorMsg
+            @session.id = user.id -- log them in
+            redirect_to: @url_for user --TODO redirect somewhere else
     }
 
     [modify_user: "/modify_user"]: respond_to {
@@ -71,9 +68,7 @@ class UsersApp extends lapis.Application
             if @params.form == "user_edit"
                 if user.id == current_user.id
                     if user.password == @params.oldpassword
-                        user, errorMsg = user\update password: @params.password
-                        if errorMsg
-                            return errorMsg
+                        assert_error user\update password: @params.password
                     else
                         return "Invalid password."
 
@@ -96,9 +91,7 @@ class UsersApp extends lapis.Application
                         else
                             columns.admin = false
 
-                    _, errorMsg = user\update columns --is this right?
-                    if errorMsg
-                        return errorMsg
+                    assert_error user\update columns
 
             redirect_to: @url_for user
     }

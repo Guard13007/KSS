@@ -4,7 +4,7 @@ csrf = require "lapis.csrf"
 Saves = require "models.Saves"
 Users = require "models.Users"
 
-import respond_to from require "lapis.application"
+import respond_to, assert_error from require "lapis.application"
 
 file_exists = (filename) ->
     handle = io.open(filename, "r")
@@ -42,12 +42,9 @@ class UploadApp extends lapis.Application
                 if file_exists filename
                     return "Error: Please upload again in a moment, and report this error to Guard13007 immediately." --TODO remove the need for this error (by automatically choosing a new file name)
 
-                File, errorMsg = io.open(filename, "w")
-                if File
-                    File\write file.content
-                    File\close!
-                else
-                    return errorMsg
+                File = assert_error io.open filename, "w"
+                File\write file.content
+                File\close!
 
                 new_save, errorMsg = Saves\create {
                     file: filename
