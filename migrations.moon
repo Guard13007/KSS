@@ -1,4 +1,5 @@
 import create_table
+    drop_table
     types
     add_column from require "lapis.db.schema"
 
@@ -40,4 +41,6 @@ db = require "lapis.db"
             {"id", types.serial primary_key: true}
             {"value", types.text unique: true}
         }
+    [7]: =>
+        drop_table "xss"
 }
