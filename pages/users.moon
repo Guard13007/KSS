@@ -55,7 +55,7 @@ class UsersApp extends lapis.Application
 
             if user
                 @session.id = user.id -- log them in
-                redirect_to: @url_for "user", name: user.name --TODO redirect somewhere else
+                redirect_to: @url_for user --TODO redirect somewhere else
             else
                 return errorMsg
     }
@@ -101,7 +101,7 @@ class UsersApp extends lapis.Application
                     if errorMsg
                         return errorMsg
 
-            redirect_to: @url_for("user", name: user.name)
+            redirect_to: @url_for user
     }
 
     [login: "/login"]: respond_to {
@@ -121,11 +121,11 @@ class UsersApp extends lapis.Application
             if user = Users\find name: @params.name
                 if user.password == @params.password
                     @session.id = user.id
-                    return redirect_to: @url_for "user", name: user.name --TODO redirect somewhere else
+                    return redirect_to: @url_for user --TODO redirect somewhere else
 
             return "Invalid login information."
     }
 
     [logout: "/logout"]: =>
         @session.id = nil --this should be all that is needed to log out
-        redirect_to: @url_for("index")
+        redirect_to: @url_for "index"
