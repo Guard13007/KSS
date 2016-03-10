@@ -17,7 +17,6 @@ file_exists = (filename) ->
 class UploadApp extends lapis.Application
     [upload: "/upload"]: respond_to {
         GET: =>
-            @token = csrf.generate_token @
             @title = "Upload a Save"
             render: true
         POST: =>

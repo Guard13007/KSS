@@ -31,7 +31,7 @@ class UserWidget extends Widget
                     input type: "hidden", name: "form", value: "user_edit"
                     input type: "hidden", name: "user_id", value: @user.id
                     br!
-                    input type: "hidden", name: "csrf_token", value: @token
+                    input type: "hidden", name: "csrf_token", value: @csrf_token
                     input type: "submit"
 
             if current_user.admin
@@ -65,5 +65,5 @@ class UserWidget extends Widget
                     input type: "hidden", name: "form", value: "admin_edit"
                     input type: "hidden", name: "user_id", value: @user.id
                     br!
-                    input type: "hidden", name: "csrf_token", value: @token
+                    input type: "hidden", name: "csrf_token", value: @csrf_token
                     input type: "submit"

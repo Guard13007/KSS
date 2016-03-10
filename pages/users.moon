@@ -25,7 +25,6 @@ class UsersApp extends lapis.Application
             @title = "404: Not Found"
             return status: 404, "User not found."
 
-        @token = csrf.generate_token @
         @title = @user.name
         @subtitle = @user.id
         render: true
@@ -38,7 +37,6 @@ class UsersApp extends lapis.Application
                 else
                     return "Error: Session ID is invalid. Please report this error." --TODO have an error report in the error itself? Or make the error report itself dammit
             else
-                @token = csrf.generate_token @
                 @title = "Create Account"
                 @subtitle = "Welcome to Kerbal Warfare"
                 render: true
@@ -112,7 +110,6 @@ class UsersApp extends lapis.Application
                 else
                     return "Error: Session ID is invalid. Please report this error." --TODO have errors like this report themselves?
             else
-                @token = csrf.generate_token @
                 @title = "Log In"
                 render: true
         POST: =>

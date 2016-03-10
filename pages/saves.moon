@@ -21,7 +21,6 @@ class SavesApp extends lapis.Application
             @title = "404: Not Found"
             return status: 404, h3 "Save not found."
 
-        @token = csrf.generate_token @
         @title = "Save File"
         @subtitle = @save.id
         render: true

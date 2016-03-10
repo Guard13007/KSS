@@ -27,5 +27,5 @@ class SaveWidget extends Widget
                         input type: "checkbox", name: "delete"
                         input type: "hidden", name: "save_id", value: @save.id
                         br!
-                        input type: "hidden", name: "csrf_token", value: @token
+                        input type: "hidden", name: "csrf_token", value: @csrf_token
                         input type: "submit"

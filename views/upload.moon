@@ -27,7 +27,7 @@ class UploadWidget extends Widget
                     textarea rows: 10, cols: 80, name: "report"
                     p "Save file:"
                     input type: "file", name: "file"
-                    input type: "hidden", name: "csrf_token", value: @token
+                    input type: "hidden", name: "csrf_token", value: @csrf_token
                     input type: "submit"
             else
                 p "You are not allowed to upload right now."
