@@ -23,7 +23,7 @@ class Users extends Model
                 return "That username is already taken."
 
             if value != trim value
-                return "Usernames must not start or end with spaces."
+                return "Usernames must not start or end with spaces. \"#{value}\""
 
             lower = value\lower!
             if (lower == "admin") or (lower == "administrator") or (lower == "new")
