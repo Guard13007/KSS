@@ -11,19 +11,18 @@ class Users extends Model
         name: (value) =>
             --TODO honestly, I should just allow letters, numbers, and _ and - ONLY...
 
-            if value\find "/"
-                return "Usernames cannot have a / in them."
-
             -- block these?  ?=#
 
             if not value
                 return "You must have a username."
 
+            value = trim value
+
+            if value\find "/"
+                return "Usernames cannot have a / in them."
+
             if Users\find name: value
                 return "That username is already taken."
-
-            if value != trim value
-                return "Usernames must not start or end with spaces. \"#{value}\""
 
             lower = value\lower!
             if (lower == "admin") or (lower == "administrator") or (lower == "new")
