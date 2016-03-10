@@ -18,7 +18,7 @@ class Layout extends Widget
                         span! -- Hamburger icon!
                     div id: "menu", ->
                         div class: "pure-menu", ->
-                            a class: "pure-menu-heading", href: @url_for("index"), "K.S.S." --NOTE top level special looking link (should it be used??)
+                            a class: "pure-menu-heading", href: @url_for("index"), "Home"
                             ul class: "pure-menu-list", ->
                                 li class: "pure-menu-item", -> a href: @url_for("saves"), class: "pure-menu-link", "Saves"
                                 li class: "pure-menu-item", -> a href: @url_for("users"), class: "pure-menu-link", "Users"
@@ -39,11 +39,14 @@ class Layout extends Widget
                             mins = math.floor time_diff/60
                             hours = math.floor mins/60
                             mins = mins%60
+                            if hours < 10
+                                hours = tostring(hours) .. "0"
+                            if mins < 10
+                                mins = tostring(mins) .. "0"
                             p ->
                                 text "Time remaining:"
                                 br!
                                 text "#{hours}:#{mins}"
-                                --text time_ago_in_words os.time tomorrow_time --no idea if this will work, probably won't
                             tomorrow = day + 1
                             if tomorrow == 8
                                 tomorrow = 1
@@ -66,7 +69,7 @@ class Layout extends Widget
                             p "Date:", br, os.date("!%Y/%m/%d") , br, "Time:", br , os.date("!%H:%M")
                     div id: "main", ->
                         div class: "header", ->
-                            h1 @title or "Kerbal Save Sharing"
+                            h1 @title or "Kerbal Warfare"
                             h2 @subtitle if @subtitle
                         div class: "content", ->
                             @content_for "inner"
