@@ -40,9 +40,9 @@ class Layout extends Widget
                             hours = math.floor mins/60
                             mins = mins%60
                             if hours < 10
-                                hours = tostring(hours) .. "0"
+                                hours = "0#{hours}"
                             if mins < 10
-                                mins = tostring(mins) .. "0"
+                                mins = "0#{mins}"
                             p ->
                                 text "Time remaining:"
                                 br!
