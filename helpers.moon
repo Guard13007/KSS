@@ -1,3 +1,5 @@
+import yield_error from require "lapis.application"
+
 get_day = (day) ->
     switch day
         when 0
@@ -18,9 +20,9 @@ get_day = (day) ->
             return "Saturday"
         else
             if @user
-                error("User \"#{@user.name}\" (ID: \"#{@user.id}\") has invalid weekday.")
+                yield_error("User \"#{@user.name}\" (ID: \"#{@user.id}\") has invalid weekday.")
             else
-                error("Invalid day. (Please use @user when calling get_day!)")
+                yield_error("Invalid day. (Please use @user when calling get_day!)")
 
 gmt_time = () ->
     return os.time(os.date("!*t"))
