@@ -18,8 +18,8 @@ class SavesApp extends lapis.Application
         @save = Saves\find id: @params.id
 
         if not @save
-            @title = "Save Not Found"
-            return status: 404, "Not found."
+            @title = "404: Not Found"
+            return status: 404, h3 "Save not found."
 
         @token = csrf.generate_token @
         @title = "Save File"
@@ -35,12 +35,15 @@ class SavesApp extends lapis.Application
             -- TODO the first 3 if's should go into a is_admin function
             -- specifically user = is_admin! (returns nil or the user if they are admin)
             --  so use is "if user = is_admin!", and then do whatever if they are an admin
+            @title = "Error"
+
             if @session.id
                 if user = Users\find id: @session.id
                     if user.admin
                         if @params.delete == "on"
                             if save = Saves\find id: @params.save_id
                                 if save\delete!
+                                    @title = nil
                                     return "Save deleted."
                                 else
                                     return "Error deleting save."

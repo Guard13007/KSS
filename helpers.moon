@@ -17,7 +17,10 @@ get_day = (day) ->
         when 7
             return "Saturday"
         else
-            error("User \"#{@user.name}\" (ID: \"#{@user.id}\") has invalid weekday.") -- this will break when @user isn't defined...
+            if @user
+                error("User \"#{@user.name}\" (ID: \"#{@user.id}\") has invalid weekday.")
+            else
+                error("Invalid day. (Please use @user when calling get_day!)")
 
 gmt_time = () ->
     return os.time(os.date("!*t"))

@@ -37,10 +37,10 @@ class UploadApp extends lapis.Application
             file = @params.file
             if #file.content > 0
                 date = os.date("!%Y.%m.%d.%H.%M.%S")
-                filename = "static/uploads/#{date .. file.filename\match("^.+(%..+)$")}"
+                filename = "static/uploads/#{date .. file.filename\match("^.+(%..+)$")}" --TODO make this a file_ext function ? also store file extension
 
                 if file_exists filename
-                    return "Error: Please upload again in a moment, and report this error to Guard13007 immediately." --TODO remove the need for this error
+                    return "Error: Please upload again in a moment, and report this error to Guard13007 immediately." --TODO remove the need for this error (by automatically choosing a new file name)
 
                 File, errorMsg = io.open(filename, "w")
                 if File

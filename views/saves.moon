@@ -16,6 +16,7 @@ class SavesWidget extends Widget
                     for save in ipairs @saves
                         tr ->
                             td @saves[save].created_at
+                            -- TODO some sort of @saves.get_users! function or something? the associations stuff
                             user = Users\find id: @saves[save].user_id --NOTE probably massively inefficient, lots of queries!!
                             td -> a href: @url_for("user", name: user.name), user.name
                             td -> a href: @build_url(@saves[save].file), target: "_blank", download: true, "Download"

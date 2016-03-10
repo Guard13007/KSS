@@ -6,13 +6,14 @@ class SaveWidget extends Widget
     content: =>
         script src: @build_url "static/js/form.js"
 
-        pre @save.report --TODO find a way to limit width?
+        pre @save.report
         hr!
         p "Created by: ", (@save\get_user!).name
         p -> a href: @build_url(@save.file), download: true, "Download" --TODO make file ext available here
 
         if @session.id
             if user = Users\find id: @session.id
+                --TODO users can edit reports on their own saves, see users for example
                 if user.admin
                     hr!
                     form {

@@ -1,10 +1,8 @@
-# Kerbal Save Sharing
+# Kerbal Warfare
 
-A website for sharing Kerbal Space Program save files.
-Primarily designed for a turn-based combat series.
+A website for managing a turn-based warfare game in Kerbal Space Program.
 
-Currently lacks basic features and is heavily work-in-progress.
-Should be working in a week or so.
+Very work-in-progress, but functional.
 
 ## Setup
 
@@ -14,13 +12,15 @@ Should be working in a week or so.
    (for production: `kss_live`, for development: `kss_dev`)
 3. Create `secret.moon` with database password and a secret string.
    (see `secret.moon.example` for an example)
-4. Compile moonscript files.
+4. Place SSL certificate in `ssl/`.
+   (public: `fullchain.pem`, private: `privkey.pem`)
+5. Compile moonscript files.
    (run `moonc .`)
-5. Run migrations.
+6. Run migrations.
    (run `lapis migrate [env]` (env is `production` or `development`))
-6. Start the server.
+7. Start the server.
    (run `lapis server [env]` (same environments))
-7. Log into the default admin account and change its password.
+8. Log into the default admin account and change its password.
    (username: `admin`, password `changeme`)
 
 ### Note to self

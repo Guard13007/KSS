@@ -34,7 +34,7 @@ class UserWidget extends Widget
                     input type: "hidden", name: "csrf_token", value: @token
                     input type: "submit"
 
-            if current_user.admin --and      what the FUCK was this unknown and doing here?!
+            if current_user.admin
                 hr!
                 script src: @build_url "static/js/form.js"
                 h2 "Admin Panel"

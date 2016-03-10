@@ -22,8 +22,8 @@ class UsersApp extends lapis.Application
         @user = Users\find name: unescape(@params.name)
 
         if not @user
-            @title = "User Not Found"
-            return status: 404, "Not found."
+            @title = "404: Not Found"
+            return status: 404, "User not found."
 
         @token = csrf.generate_token @
         @title = @user.name
@@ -40,7 +40,7 @@ class UsersApp extends lapis.Application
             else
                 @token = csrf.generate_token @
                 @title = "Create Account"
-                @subtitle = "Welcome to K.S.S."
+                @subtitle = "Welcome to Kerbal Warfare"
                 render: true
         POST: =>
             csrf.assert_token @ --TODO make this pretty print invalid token instead of erroring out entirely
@@ -50,7 +50,6 @@ class UsersApp extends lapis.Application
                 password: @params.password
             }
 
-            --TODO check if user, print errorMsg
             --TODO capture errors and display appropriate response! (or use validate (same syntax as assert_valid without the errors!) to validate input first!)
             --TODO modify stack trace output to include note to email me the error ?!
 
@@ -72,7 +71,6 @@ class UsersApp extends lapis.Application
 
             if @params.form == "user_edit"
                 if user.id == current_user.id
-                    print("ENTER")
                     if user.password == @params.oldpassword
                         user, errorMsg = user\update password: @params.password
                         if errorMsg
@@ -99,7 +97,7 @@ class UsersApp extends lapis.Application
                         else
                             columns.admin = false
 
-                    _, errorMsg = user\update columns
+                    _, errorMsg = user\update columns --is this right?
                     if errorMsg
                         return errorMsg
 
