@@ -41,14 +41,14 @@ class UsersApp extends lapis.Application
                 @subtitle = "Welcome to Kerbal Warfare"
                 render: true
         POST: =>
-            csrf.assert_token @ --TODO make this pretty print invalid token instead of erroring out entirely
+            unless csrf.validate_token @
+                return "Invalid token. Please try again."
 
             user, errorMsg = Users\create {
                 name: @params.name
                 password: @params.password
             }
 
-            --TODO capture errors and display appropriate response! (or use validate (same syntax as assert_valid without the errors!) to validate input first!)
             --TODO modify stack trace output to include note to email me the error ?!
 
             if user
@@ -62,7 +62,8 @@ class UsersApp extends lapis.Application
         GET: =>
             return status: 404, "Not found."
         POST: =>
-            csrf.assert_token @
+            unless csrf.validate_token @
+                return "Invalid token. Please try again."
 
             current_user = Users\find id: @session.id
             user = Users\find id: @params.user_id
@@ -113,7 +114,8 @@ class UsersApp extends lapis.Application
                 @title = "Log In"
                 render: true
         POST: =>
-            csrf.assert_token @
+            unless csrf.validate_token @
+                return "Invalid token. Please try again."
 
             if user = Users\find name: @params.name
                 if user.password == @params.password

@@ -29,7 +29,8 @@ class SavesApp extends lapis.Application
         GET: =>
             return status: 404, "Not found."
         POST: =>
-            csrf.assert_token @
+            unless csrf.validate_token @
+                return "Invalid token. Please try again." --TODO pretty print errors
 
             -- TODO the first 3 if's should go into a is_admin function
             -- specifically user = is_admin! (returns nil or the user if they are admin)

@@ -20,7 +20,8 @@ class UploadApp extends lapis.Application
             @title = "Upload a Save"
             render: true
         POST: =>
-            csrf.assert_token @
+            unless csrf.validate_token @
+                return "Invalid token. Please try again." --TODO pretty print errors
 
             @title = "Error" --redirects on success, so this will only apply to an error
 
