@@ -25,7 +25,7 @@ get_day = (day) ->
 gmt_time = () ->
     return os.time(os.date("!*t"))
 
-trim = (s) ->
-    return s\match '^()%s*$' and '' or s\match '^%s*(.*%S)'
-
-return { :get_day, :gmt_time, :trim }
+return {
+    :get_day
+    :gmt_time
+}

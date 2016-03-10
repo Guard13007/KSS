@@ -1,6 +1,5 @@
 import Model from require "lapis.db.model"
-import escape from require "lapis.util"
-import trim from require "helpers"
+import escape, trim from require "lapis.util"
 
 class Users extends Model
     @timestamp: true
