@@ -1,6 +1,8 @@
 lapis = require "lapis"
 csrf = require "lapis.csrf"
 
+import get_day from require "helpers"
+
 Saves = require "models.Saves"
 Users = require "models.Users"
 
