@@ -18,7 +18,14 @@ class UploadApp extends lapis.Application
     [upload: "/upload"]: respond_to {
         GET: =>
             @title = "Upload a Save"
-            render: true
+
+            if not @session.id
+                return "You must be logged in to upload."
+
+            user = Users\find id: @session.id
+            if not (user.weekday == day) and (not user.admin)
+                return "You are not allowed to upload today. Please check the schedule."
+            --render: true
         POST: =>
             unless csrf.validate_token @
                 return "Invalid token. Please try again." --TODO pretty print errors

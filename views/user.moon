@@ -28,9 +28,9 @@ class UserWidget extends Widget
                     input type: "password", name: "oldpassword"
                     p "New password:"
                     input type: "password", name: "password"
+                    br!
                     input type: "hidden", name: "form", value: "user_edit"
                     input type: "hidden", name: "user_id", value: @user.id
-                    br!
                     input type: "hidden", name: "csrf_token", value: @csrf_token
                     input type: "submit"
 
@@ -62,8 +62,8 @@ class UserWidget extends Widget
                         input type: "checkbox", name: "admin"
                     p "Delete user? "
                     input type: "checkbox", name: "delete"
+                    br!
                     input type: "hidden", name: "form", value: "admin_edit"
                     input type: "hidden", name: "user_id", value: @user.id
-                    br!
                     input type: "hidden", name: "csrf_token", value: @csrf_token
                     input type: "submit"
