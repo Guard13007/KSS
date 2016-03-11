@@ -42,7 +42,7 @@ class SavesApp extends lapis.Application
 
             save = assert_error Saves\find id: @params.save_id
             current_user = assert_error Users\find id: @session.id
-            user = assert_error save.get_user!
+            user = assert_error save\get_user!
 
             if @params.form == "user_edit"
                 save.report = @params.report
