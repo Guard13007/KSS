@@ -23,6 +23,7 @@ class UploadApp extends lapis.Application
                 return "You must be logged in to upload."
 
             user = Users\find id: @session.id
+            day = get_day os.date("!*t").wday
             if not (user.weekday == day) and (not user.admin)
                 return "You are not allowed to upload today. Please check the schedule."
             --render: true

@@ -30,7 +30,7 @@ class SaveWidget extends Widget
                         input type: "hidden", name: "save_id", value: @save.id
                         input type: "hidden", name: "csrf_token", value: @csrf_token
                         input type: "submit"
-                if user.admin
+                if current_user.admin
                     hr!
                     form {
                         action: "/modify_save"
