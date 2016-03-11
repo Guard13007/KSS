@@ -45,7 +45,7 @@ class SavesApp extends lapis.Application
             user = assert_error save\get_user!
 
             if @params.form == "user_edit"
-                save = assert_error save\update report: @params.report
+                assert_error save\update report: @params.report --NOTE is this valid syntax? additionally, is our copy of save updated??
                 redirect_to: @url_for save
 
             if @params.form == "admin_edit"

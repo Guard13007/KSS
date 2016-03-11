@@ -4,7 +4,7 @@ import escape, trim from require "lapis.util"
 class Users extends Model
     @timestamp: true
     url_params: (req, ...) =>
-        "user", {name: escape(@name)}, ... --is escaping here correct?
+        "user", {name: escape(@name)}, ...
 
     @constraints: {
         name: (value) =>
