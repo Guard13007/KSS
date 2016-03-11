@@ -26,6 +26,7 @@ class SaveWidget extends Widget
                     }, ->
                         h3 "Edit report?"
                         textarea rows: 10, cols: 80, name: "report", @save.report
+                        br!
                         input type: "hidden", name: "form", value: "user_edit"
                         input type: "hidden", name: "save_id", value: @save.id
                         input type: "hidden", name: "csrf_token", value: @csrf_token

@@ -45,14 +45,14 @@ class SavesApp extends lapis.Application
             user = assert_error save\get_user!
 
             if @params.form == "user_edit"
-                save.report = @params.report
-                save = assert_error save\update!
+                save = assert_error save\update report: @params.report
                 redirect_to: @url_for save
+
             if @params.form == "admin_edit"
                 if current_user.admin
                     if @params.delete == "on"
                         file = save.file
-                        if save\delete! --NOTE WE NEED A "ON-DELETE TO ALSO REMOVE THE FILE ITSELF!"
+                        if save\delete!
                             @title = nil
                             os.remove file
                             return "Save deleted." --TODO redirect with message instead of its own "page"
