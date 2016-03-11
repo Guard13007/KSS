@@ -24,9 +24,11 @@ class UploadApp extends lapis.Application
 
             user = Users\find id: @session.id
             day = os.date("!*t").wday
+
             if not (user.weekday == day) and (not user.admin)
                 return "You are not allowed to upload today. Please check the schedule."
-            --render: true
+
+            render: true
         POST: =>
             unless csrf.validate_token @
                 return "Invalid token. Please try again." --TODO pretty print errors
