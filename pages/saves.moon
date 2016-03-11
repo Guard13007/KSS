@@ -45,10 +45,13 @@ class SavesApp extends lapis.Application
             user = assert_error save\get_user!
 
             if @params.form == "user_edit"
+                PRINT "TRRRRRRUUUUUUUUUUUUEEEEEEEEEEEEEEEE"
                 save\update report: @params.report --NOTE is this valid syntax? additionally, is our copy of save updated?? how do we know if it errored!?
                 redirect_to: @url_for save
+                Print "failed to redirect"
 
             if @params.form == "admin_edit"
+                print "ADDDDMIIIIIIIIIIINNNNNN"
                 if current_user.admin
                     if @params.delete == "on"
                         file = save.file
