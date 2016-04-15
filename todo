@@ -1,0 +1,4 @@
+- Might need to modify lunamark's escape fn to escape more chars
+    (see the OWASPI or whatever docs about XSS)
+- Try installing lunamark (luarocks install lunamark) on server and test this commit!
+- Assuming it works, add it to the ReadMe about how to set up the stuff!

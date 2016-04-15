@@ -25,7 +25,24 @@ get_day = (day) ->
 gmt_time = () ->
     return os.time(os.date("!*t"))
 
+lunamark = require "lunamark"
+
+markdown = (input) ->
+    writer = lunamark.writer.html5.new!
+    
+    writer.inline_html = (s) ->
+        return writer.string s
+    writer.display_html = (s) ->
+        return writer.string s
+    
+    parse = lunamark.reader.markdown.new writer --TODO set options table n stuff
+    
+    output = parse input
+    print output
+    return ouput
+
 return {
     :get_day
     :gmt_time
+    :markdown
 }
