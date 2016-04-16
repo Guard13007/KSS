@@ -23,11 +23,14 @@ class UserWidget extends Widget
                     method: "POST"
                     enctype: "multipart/form-data"
                     class: "pure-form"
+                    onsubmit: "return confirm_delete('Are you sure you want to delete this user?');"
                 }, ->
                     p "Old password:"
                     input type: "password", name: "oldpassword"
                     p "New password:"
                     input type: "password", name: "password"
+                    p "Delete user? "
+                    input type: "checkbox", name: "delete"
                     br!
                     input type: "hidden", name: "form", value: "user_edit"
                     input type: "hidden", name: "user_id", value: @user.id

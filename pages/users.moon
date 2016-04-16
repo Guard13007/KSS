@@ -67,6 +67,13 @@ class UsersApp extends lapis.Application
 
             if @params.form == "user_edit"
                 if user.id == current_user.id
+                    if @params.delete
+                        if user\delete!
+                            @session.id = nil
+                            return "User deleted."
+                        else
+                            return "Error deleting user."
+
                     if user.password == @params.oldpassword
                         assert_error user\update password: @params.password
                     else
