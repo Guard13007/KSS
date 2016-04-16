@@ -1,5 +1,5 @@
 import Widget from require "lapis.html"
-import get_day from require "helpers"
+import get_day_name from require "helpers"
 import max from math
 
 class UsersWidget extends Widget
@@ -26,7 +26,7 @@ class UsersWidget extends Widget
 
                         if @users.active[i]
                             td -> a href: @url_for(@users.active[i]), @users.active[i].name
-                            td -> text get_day @users.active[i].weekday
+                            td -> text get_day_name @users.active[i].weekday
                         else
                             td ""
                             td ""

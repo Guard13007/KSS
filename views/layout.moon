@@ -1,5 +1,5 @@
 import Widget from require "lapis.html"
-import get_day from require "helpers"
+import get_day_name from require "helpers"
 
 Users = require "models.Users"
 
@@ -67,7 +67,7 @@ class Layout extends Widget
                                     li class: "pure-menu-item", -> a href: @url_for("login"), class: "pure-menu-link", "Log In"
                                     li class: "pure-menu-item", -> a href: @url_for("create_user"), class: "pure-menu-link", "Create Account"
                             hr!
-                            p "Day:", br, get_day(os.date("!*t").wday), br, "Date:", br, os.date("!%Y/%m/%d"), br, "Time:", br, os.date("!%H:%M")
+                            p "Day:", br, get_day_name(os.date("!*t").wday), br, "Date:", br, os.date("!%Y/%m/%d"), br, "Time:", br, os.date("!%H:%M")
                     div id: "main", ->
                         div class: "header", ->
                             h1 @title or "Kerbal Warfare"

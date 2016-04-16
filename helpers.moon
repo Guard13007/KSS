@@ -1,4 +1,4 @@
-get_day = (day) ->
+get_day_name = (day) ->
     switch day
         when 0
             return "None"
@@ -20,7 +20,7 @@ get_day = (day) ->
             if @user
                 error("User \"#{@user.name}\" (ID: \"#{@user.id}\") has invalid weekday.")
             else
-                error("Invalid day. (Please use @user when calling get_day!)")
+                error("Invalid day (#{day}).")
 
 gmt_time = () ->
     return os.time(os.date("!*t"))
@@ -47,7 +47,7 @@ gmt_time = () ->
 --    return ouput
 
 return {
-    :get_day
+    :get_day_name
     :gmt_time
     --:markdown
 }

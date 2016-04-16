@@ -1,11 +1,11 @@
 import Widget from require "lapis.html"
-import get_day from require "helpers"
+import get_day_name from require "helpers"
 
 Users = require "models.Users"
 
 class UserWidget extends Widget
     content: =>
-        p "This user's weekday is: ", get_day @user.weekday
+        p "This user's weekday is: ", get_day_name @user.weekday
         p "Sorry, not much else available on users yet. We're working on it."
         hr!
         if @user.admin
@@ -52,9 +52,9 @@ class UserWidget extends Widget
                     element "select", name: "weekday", ->
                         for day = 0, 7
                             if @user.weekday == day
-                                option value: day, selected: true, get_day day
+                                option value: day, selected: true, get_day_name day
                             else
-                                option value: day, get_day day
+                                option value: day, get_day_name day
                     p "Admin? "
                     if @user.admin
                         input type: "checkbox", name: "admin", checked: true
