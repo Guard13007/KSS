@@ -25,20 +25,4 @@ gmt_time = () ->
 trim = (s) ->
     return s\match '^()%s*$' and '' or s\match '^%s*(.*%S)'
 
-lunamark = require "lunamark"
-
-markdown = (input) ->
-    writer = lunamark.writer.html5.new!
-
-    writer.inline_html = (s) ->
-        return writer.string s
-    writer.display_html = (s) ->
-        return writer.string s
-
-    parse = lunamark.reader.markdown.new writer --TODO set options table to use
-
-    output = parse input
-    print output
-    return output
-
-return { :get_day, :gmt_time, :trim, :markdown }
+return { :get_day, :gmt_time, :trim }

@@ -7,8 +7,7 @@ class SaveWidget extends Widget
     content: =>
         script src: @build_url "static/js/form.js"
 
-        div ->
-            raw -> markdown @save.report --TODO make sure this is actually calling for raw output
+        pre @save.report
         hr!
         p "Created by: ", (@save\get_user!).name
         p -> a href: @build_url(@save.file), download: true, "Download" --TODO make file ext available here
