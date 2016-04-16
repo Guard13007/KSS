@@ -7,7 +7,7 @@ Very work-in-progress, but functional.
 ## Setup
 
 1. Install prerequisites.
-   (OpenResty, PostgreSQL, luarocks, moonscript, Lapis)
+   (OpenResty, PostgreSQL, luarocks, moonscript, Lapis, LPeg)
 2. Setup database(s).
    (for production: `kss_live`, for development: `kss_dev`)
 3. Create `secret.moon` with database password and a secret string.
@@ -19,9 +19,13 @@ Very work-in-progress, but functional.
 6. Run migrations.
    (run `lapis migrate [env]` (env is `production` or `development`))
 7. Start the server.
-   (run `lapis server [env]` (same environments))
+   (run `lapis server [env]` (env is `production` or `development`))
 8. Log into the default admin account and change its password.
    (username: `admin`, password `changeme`)
+
+It is recommended to use `letsencrypt` and make symbolic links from the `live`
+certificate files to `ssl/` instead of copying them.
+(Ex: `ln -s /etc/letsencrypt/live/site.domain/privkey.pem ./ssl/privkey.pem`)
 
 ### Note to self
 
