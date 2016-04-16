@@ -113,7 +113,7 @@ class UsersApp extends lapis.Application
             if user = Users\find name: @params.name
                 if user.password == @params.password
                     @session.id = user.id
-                    return redirect_to: @url_for user --TODO redirect somewhere else
+                    return redirect_to: @url_for index
 
             return "Invalid login information."
     }

@@ -8,17 +8,13 @@ class Users extends Model
 
     @constraints: {
         name: (value) =>
-            --TODO honestly, I should just allow letters, numbers, and _ and - ONLY...
-
-            -- block these?  ?=#
-
             if not value
                 return "You must have a username."
 
             value = trim value
 
-            if value\find "/"
-                return "Usernames cannot have a / in them."
+            if value\find "%W"
+                return "Usernames can only contain alphanumeric characters."
 
             if Users\find name: value
                 return "That username is already taken."
@@ -34,13 +30,13 @@ class Users extends Model
             if #value < 4
                 return "Your password must be at least 4 characters."
 
-        weekday: (value) =>
-            value = 0 unless value -- enforce defaulting to zero
-
-            value = tonumber value --fixes accidentally using a string that would otherwise be valid
+        weekday: (value=0) =>
+            -- fix accidentally using a string that would otherwise be valid
+            value = tonumber value
             if value == nil
                 return "Please enter a valid number."
 
+            -- must be in range (0 = no day, 1-7 = Sunday to Saturday)
             if (value > 7) or (value < 0)
                 return "Weekday must be 0 to 7. 0 disables a user from uploading, 1-7 represents Sunday through Saturday."
     }
