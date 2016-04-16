@@ -1,5 +1,5 @@
 import Widget from require "lapis.html"
-import get_day_name from require "helpers"
+import get_day_name from require "helpers.time"
 
 Users = require "models.Users"
 

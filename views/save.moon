@@ -1,5 +1,5 @@
 import Widget from require "lapis.html"
---import markdown from require "helpers"
+--import markdown from require "helpers.parsing"
 
 Users = require "models.Users"
 

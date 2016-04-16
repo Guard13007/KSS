@@ -17,37 +17,19 @@ get_day_name = (day) ->
         when 7
             return "Saturday"
         else
-            if @user
+            if @user --NOTE this line itself might error, I need to intentionally test this with bad data
                 error("User \"#{@user.name}\" (ID: \"#{@user.id}\") has invalid weekday.")
             else
                 error("Invalid day (#{day}).")
 
+gmt_date = () ->
+    return os.date("!*t")
+
 gmt_time = () ->
     return os.time(os.date("!*t"))
 
---lunamark = require "lunamark"
---
---markdown = (input) ->
---    writer = lunamark.writer.html5.new!
---
---    writer.inline_html = (s) ->
---        return writer.string s
---    writer.display_html = (s) ->
---        return writer.string s
---
---    parse = lunamark.reader.markdown.new writer, {
---        definition_lists: true
---        require_blank_before_blockquote: true
---        require_blank_before_header: true
---        hash_enumerators: true
---    }
---
---    output = parse input
---    print output
---    return ouput
-
 return {
     :get_day_name
+    :gmt_date
     :gmt_time
-    --:markdown
 }
