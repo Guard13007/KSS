@@ -1,6 +1,0 @@
-This is a hacky modification done to lunamark to get it functional.
-
-modifying line 893 in /usr/local/share/lua/5.1/lunamark/reader/markdown.lua
-
-so that Blank^0 is Blank^1, fixes it? block elements must be separated by
-blank lines, which isn't true for pure markdown, but fuck it

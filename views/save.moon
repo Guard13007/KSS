@@ -1,5 +1,5 @@
 import Widget from require "lapis.html"
-import markdown from require "helpers"
+--import markdown from require "helpers"
 
 Users = require "models.Users"
 
@@ -11,7 +11,7 @@ class SaveWidget extends Widget
 
         pre @save.report
         --div ->
-        --    raw -> markdown @save.report --TODO make sure this is working correctly (and raw is the correct thing to call)
+        --    raw -> markdown @save.report
         hr!
         p "Created by: ", user.name
         p -> a href: @build_url(@save.file), download: true, "Download" --TODO make file ext available here
