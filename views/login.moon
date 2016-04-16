@@ -12,6 +12,6 @@ class LoginWidget extends Widget
             input type: "text", name: "name"
             p "Password:"
             input type: "password", name: "password"
-            input type: "hidden", name: "csrf_token", value: @token
+            input type: "hidden", name: "csrf_token", value: @csrf_token
             br!
             input type: "submit", value: "Log in"

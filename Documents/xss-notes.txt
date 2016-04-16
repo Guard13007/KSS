@@ -1,0 +1,33 @@
+64 redirects to another page
+65 sets to about:blank
+
+everything is safe as long as it doesn't go into a script or tag-name/tag-attribute-name
+URLs are safe if escaped first I believe
+
+16 total xss vulnerabilities so far
+
+all in one pages:
+2
+11
+16
+17
+30
+32
+36
+37
+45
+46
+64 special
+65 special
+66
+67
+75
+79
+
+TEST FOR ONMOUSEOVER ON THESE:
+9
+10
+13
+14
+15
+67

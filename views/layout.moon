@@ -1,4 +1,6 @@
 import Widget from require "lapis.html"
+import gmt_date, get_day_name from require "helpers.time"
+import shallow_copy from require "helpers.table"
 
 Users = require "models.Users"
 
@@ -18,32 +20,36 @@ class Layout extends Widget
                         span! -- Hamburger icon!
                     div id: "menu", ->
                         div class: "pure-menu", ->
-                            a class: "pure-menu-heading", href: @url_for("index"), "K.S.S." --NOTE top level special looking link (should it be used??)
+                            a class: "pure-menu-heading", href: @url_for("index"), "Home"
                             ul class: "pure-menu-list", ->
                                 li class: "pure-menu-item", -> a href: @url_for("saves"), class: "pure-menu-link", "Saves"
                                 li class: "pure-menu-item", -> a href: @url_for("users"), class: "pure-menu-link", "Users"
                             hr!
-                            day = os.date("!*t").wday
+                            time = gmt_date!
+                            day = time.wday
                             user = Users\find weekday: day
                             if user
                                 p "Current user:", br, user.name
                             else
                                 p "Current user:", br, "N/A"
-                            tomorrow_time = os.date("!*t")
-                            --require("moon").p tomorrow_time --NOTE tmp for testing
-                            tomorrow_time.hour = 0
-                            tomorrow_time.min = 0
-                            tomorrow_time.sec = 0
-                            tomorrow_in_seconds = os.time(tomorrow_time)
-                            time_diff = tomorrow_in_seconds + 24*60*60 - os.time(os.date("!*t")) -- tomorrow_in_seconds is actually today
-                            mins = math.floor time_diff/60
+                            today = shallow_copy(time)
+                            today.hour = 0
+                            today.min = 0
+                            today.sec = 0
+                            today = os.time(today)
+                            time_to_tomorrow = today + 24*60*60 - os.time(time) -- start of today + a day - time of today = raw time till tomorrow
+                            -- process time remaining in seconds to an hours and minutes value
+                            mins = math.floor time_to_tomorrow/60
                             hours = math.floor mins/60
                             mins = mins%60
+                            if hours < 10
+                                hours = "0#{hours}"
+                            if mins < 10
+                                mins = "0#{mins}"
                             p ->
                                 text "Time remaining:"
                                 br!
                                 text "#{hours}:#{mins}"
-                                --text time_ago_in_words os.time tomorrow_time --no idea if this will work, probably won't
                             tomorrow = day + 1
                             if tomorrow == 8
                                 tomorrow = 1
@@ -63,10 +69,10 @@ class Layout extends Widget
                                     li class: "pure-menu-item", -> a href: @url_for("login"), class: "pure-menu-link", "Log In"
                                     li class: "pure-menu-item", -> a href: @url_for("create_user"), class: "pure-menu-link", "Create Account"
                             hr!
-                            p "Date:", br, os.date("!%Y/%m/%d") , br, "Time:", br , os.date("!%H:%M")
+                            p "Day:", br, get_day_name(time.wday), br, "Date:", br, os.date("!%Y/%m/%d"), br, "Time:", br, os.date("!%H:%M")
                     div id: "main", ->
                         div class: "header", ->
-                            h1 @title or "Kerbal Save Sharing"
+                            h1 @title or "Kerbal Warfare"
                             h2 @subtitle if @subtitle
                         div class: "content", ->
                             @content_for "inner"

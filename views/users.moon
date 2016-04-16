@@ -1,5 +1,5 @@
 import Widget from require "lapis.html"
-import get_day from require "helpers"
+import get_day_name from require "helpers.time"
 import max from math
 
 class UsersWidget extends Widget
@@ -20,18 +20,18 @@ class UsersWidget extends Widget
                 for i = 1, count
                     tr ->
                         if @users.admins[i]
-                            td -> a href: @url_for("user", name: @users.admins[i].name), @users.admins[i].name
+                            td -> a href: @url_for(@users.admins[i]), @users.admins[i].name
                         else
                             td ""
 
                         if @users.active[i]
-                            td -> a href: @url_for("user", name: @users.active[i].name), @users.active[i].name
-                            td -> text get_day @users.active[i].weekday
+                            td -> a href: @url_for(@users.active[i]), @users.active[i].name
+                            td -> text get_day_name @users.active[i].weekday
                         else
                             td ""
                             td ""
 
                         if @users.inactive[i]
-                            td -> a href: @url_for("user", name: @users.inactive[i].name), @users.inactive[i].name
+                            td -> a href: @url_for(@users.inactive[i]), @users.inactive[i].name
                         else
                             td ""

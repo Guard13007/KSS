@@ -1,4 +1,4 @@
-get_day = (day) ->
+get_day_name = (day) ->
     switch day
         when 0
             return "None"
@@ -17,12 +17,19 @@ get_day = (day) ->
         when 7
             return "Saturday"
         else
-            error("User \"#{@user.name}\" (ID: \"#{@user.id}\") has invalid weekday.") -- this will break when @user isn't defined...
+            if @user --NOTE this line itself might error, I need to intentionally test this with bad data
+                error("User \"#{@user.name}\" (ID: \"#{@user.id}\") has invalid weekday.")
+            else
+                error("Invalid day (#{day}).")
+
+gmt_date = () ->
+    return os.date("!*t")
 
 gmt_time = () ->
     return os.time(os.date("!*t"))
 
-trim = (s) ->
-    return s\match '^()%s*$' and '' or s\match '^%s*(.*%S)'
-
-return { :get_day, :gmt_time, :trim }
+return {
+    :get_day_name
+    :gmt_date
+    :gmt_time
+}

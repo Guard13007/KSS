@@ -1,11 +1,11 @@
 import Widget from require "lapis.html"
-import get_day from require "helpers"
+import get_day_name from require "helpers.time"
 
 Users = require "models.Users"
 
 class UserWidget extends Widget
     content: =>
-        p "This user's weekday is: ", get_day @user.weekday
+        p "This user's weekday is: ", get_day_name @user.weekday
         p "Sorry, not much else available on users yet. We're working on it."
         hr!
         if @user.admin
@@ -28,13 +28,13 @@ class UserWidget extends Widget
                     input type: "password", name: "oldpassword"
                     p "New password:"
                     input type: "password", name: "password"
+                    br!
                     input type: "hidden", name: "form", value: "user_edit"
                     input type: "hidden", name: "user_id", value: @user.id
-                    br!
-                    input type: "hidden", name: "csrf_token", value: @token
+                    input type: "hidden", name: "csrf_token", value: @csrf_token
                     input type: "submit"
 
-            if current_user.admin --and      what the FUCK was this unknown and doing here?!
+            if current_user.admin
                 hr!
                 script src: @build_url "static/js/form.js"
                 h2 "Admin Panel"
@@ -52,9 +52,9 @@ class UserWidget extends Widget
                     element "select", name: "weekday", ->
                         for day = 0, 7
                             if @user.weekday == day
-                                option value: day, selected: true, get_day day
+                                option value: day, selected: true, get_day_name day
                             else
-                                option value: day, get_day day
+                                option value: day, get_day_name day
                     p "Admin? "
                     if @user.admin
                         input type: "checkbox", name: "admin", checked: true
@@ -62,8 +62,8 @@ class UserWidget extends Widget
                         input type: "checkbox", name: "admin"
                     p "Delete user? "
                     input type: "checkbox", name: "delete"
+                    br!
                     input type: "hidden", name: "form", value: "admin_edit"
                     input type: "hidden", name: "user_id", value: @user.id
-                    br!
-                    input type: "hidden", name: "csrf_token", value: @token
+                    input type: "hidden", name: "csrf_token", value: @csrf_token
                     input type: "submit"

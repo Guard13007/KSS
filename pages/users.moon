@@ -3,7 +3,7 @@ csrf = require "lapis.csrf"
 
 Users = require "models.Users"
 
-import respond_to from require "lapis.application"
+import respond_to, assert_error from require "lapis.application"
 import unescape from require "lapis.util"
 
 class UsersApp extends lapis.Application
@@ -22,10 +22,9 @@ class UsersApp extends lapis.Application
         @user = Users\find name: unescape(@params.name)
 
         if not @user
-            @title = "User Not Found"
-            return status: 404, "Not found."
+            @title = "404: Not Found"
+            return status: 404, "User not found."
 
-        @token = csrf.generate_token @
         @title = @user.name
         @subtitle = @user.id
         render: true
@@ -38,45 +37,38 @@ class UsersApp extends lapis.Application
                 else
                     return "Error: Session ID is invalid. Please report this error." --TODO have an error report in the error itself? Or make the error report itself dammit
             else
-                @token = csrf.generate_token @
                 @title = "Create Account"
-                @subtitle = "Welcome to K.S.S."
+                @subtitle = "Welcome to Kerbal Warfare"
                 render: true
         POST: =>
-            csrf.assert_token @ --TODO make this pretty print invalid token instead of erroring out entirely
+            unless csrf.validate_token @
+                return "Invalid token. Please try again."
 
-            user, errorMsg = Users\create {
+            user = assert_error Users\create {
                 name: @params.name
                 password: @params.password
             }
 
-            --TODO check if user, print errorMsg
-            --TODO capture errors and display appropriate response! (or use validate (same syntax as assert_valid without the errors!) to validate input first!)
             --TODO modify stack trace output to include note to email me the error ?!
 
-            if user
-                @session.id = user.id -- log them in
-                redirect_to: @url_for "user", name: user.name --TODO redirect somewhere else
-            else
-                return errorMsg
+            @session.id = user.id -- log them in
+            redirect_to: @url_for user --TODO redirect somewhere else
     }
 
     [modify_user: "/modify_user"]: respond_to {
         GET: =>
             return status: 404, "Not found."
         POST: =>
-            csrf.assert_token @
+            unless csrf.validate_token @
+                return "Invalid token. Please try again."
 
             current_user = Users\find id: @session.id
             user = Users\find id: @params.user_id
 
             if @params.form == "user_edit"
                 if user.id == current_user.id
-                    print("ENTER")
                     if user.password == @params.oldpassword
-                        user, errorMsg = user\update password: @params.password
-                        if errorMsg
-                            return errorMsg
+                        assert_error user\update password: @params.password
                     else
                         return "Invalid password."
 
@@ -99,11 +91,9 @@ class UsersApp extends lapis.Application
                         else
                             columns.admin = false
 
-                    _, errorMsg = user\update columns
-                    if errorMsg
-                        return errorMsg
+                    assert_error user\update columns
 
-            redirect_to: @url_for("user", name: user.name)
+            redirect_to: @url_for user
     }
 
     [login: "/login"]: respond_to {
@@ -114,20 +104,20 @@ class UsersApp extends lapis.Application
                 else
                     return "Error: Session ID is invalid. Please report this error." --TODO have errors like this report themselves?
             else
-                @token = csrf.generate_token @
                 @title = "Log In"
                 render: true
         POST: =>
-            csrf.assert_token @
+            unless csrf.validate_token @
+                return "Invalid token. Please try again."
 
             if user = Users\find name: @params.name
                 if user.password == @params.password
                     @session.id = user.id
-                    return redirect_to: @url_for "user", name: user.name --TODO redirect somewhere else
+                    return redirect_to: @url_for user --TODO redirect somewhere else
 
             return "Invalid login information."
     }
 
     [logout: "/logout"]: =>
         @session.id = nil --this should be all that is needed to log out
-        redirect_to: @url_for("index")
+        redirect_to: @url_for "index"
