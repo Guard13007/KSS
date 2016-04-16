@@ -1,5 +1,5 @@
 shallow_copy = (original) ->
-    local copy
+    copy = {}
 
     for k,v in pairs original
         copy[k] = v
