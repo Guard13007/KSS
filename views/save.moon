@@ -9,9 +9,9 @@ class SaveWidget extends Widget
 
         user = @save\get_user!
 
-        --pre @save.report
-        div ->
-            raw -> markdown @save.report --TODO make sure this is working correctly (and raw is the correct thing to call)
+        pre @save.report
+        --div ->
+        --    raw -> markdown @save.report --TODO make sure this is working correctly (and raw is the correct thing to call)
         hr!
         p "Created by: ", user.name
         p -> a href: @build_url(@save.file), download: true, "Download" --TODO make file ext available here
