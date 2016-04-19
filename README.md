@@ -79,8 +79,60 @@ you are not.
    # now you can easily renew certificates:
    # letsencrypt renew [OR] ./letsencrypt-auto renew
    ```
-7. Set up proxy server on port 80:
-   TODO: Write this.
+7. Set up proxy server on port 80 (note: this is an nginx config):
+   ```
+   http {
+       server_tokens off;        # don't report server version
+       client_max_body_size 50m; # this is for uploading files, I need to find a work-around
+
+       ssl_certificate /etc/letsencrypt/live/domain.name/fullchain.pem;
+       ssl_certificate_key /etc/letsencrypt/live/domain.name/privkey.pem;
+       ssl_protocols TLSv1 TLSv1.1 TLSv1.2; # no SSLv3
+       ssl_prefer_server_ciphers on;        # might be a require variant? should use that?
+
+       # this gets rid of requests we aren't serving
+       server {
+           listen 80 default_server;
+           listen 443 default_server;
+           return 404;
+           #error_log /root/404s.log;
+       }
+
+       # this is the development server
+       server {
+           listen 443 ssl;
+           ssl on;
+           server_name dev.domain.name;
+           location / {
+               proxy_pass https://dev.domain.name:8001;
+           }
+       }
+
+       # redirect port 80 requests to SSL
+       server {
+           listen 80;
+           server_name dev.domain.name;
+           return 301 https://$host$request_uri; # permanently moved
+       }
+
+       # this is the production server
+       server {
+           listen 443 ssl;
+           ssl on;
+           server_name domain.name;
+           location / {
+               proxy_pass https://domain.name:8000;
+           }
+       }
+
+       # again, redirect port 80 requests
+       server {
+           listen 80;
+           server_name domain.name;
+           return 301 https://$host$request_uri;
+       }
+   }
+   ```
 8. Compile moonscript and run migrations/server:
    ```bash
    moonc .
@@ -90,19 +142,5 @@ you are not.
 
 Additionally, if you are using Chrome and a self-signed certificate, [this][1]
 might be helpful.
-
-### Note to self
-
-If you fuck up and lose the `postgres` password...
-
-```
-sudo -i -u postgres
-psql
-ALTER USER postgres WITH PASSWORD 'new_password';
-\q
-exit
-```
-
-And now it's fixed.
 
 [1]: https://stackoverflow.com/questions/7580508/getting-chrome-to-accept-self-signed-localhost-certificate
