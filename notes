@@ -1,0 +1,10 @@
+Essentially, there's a lot of discussion and arguments to be had about what mods to include, what rules to use concerning them, what settings to use, what configs to modify, the list goes on forever. This issue is about creating a system to have those arguments, discussions, etc, in a reasonable manner, in a comfortable manner.
+
+rejected: will not be used at this time, required: is required, bugged: is too buggy to use right now, but otherwise would be an endorsed enhancement or required, enhancement: is not required, but makes things nicer
+Mods have a download link, this will either be local or to another service, to a SPECIFIC VERSION and a SPECIFIC DOWNLOAD. This is REQUIRED on each mod.
+Mods will have a config link, this will be locally hosted, and be files to OVERRIDE an installed version with for custom configs. This is not required on each mod.
+ They will have a description, editable by admin only.
+ Not sure how to structure it, but comments should be allowed, by admins (and maybe regular users?)
+There will also be a master modlist (compiling by accessing the mods table based on their status) with download links for everything, optionally a master download button or something similar (obviously managed behind the scenes by admins).
+
+Separate but related: Admin-editable rule list, visible to everyone. IDs, specific rules. Rules can be modified, whatever. Viewable by all. PRIMARY key ID, title, text, order. Title is in bold at beginning of each in an ordered list, followed by text. IDs are not used for listing or order, order is used for ordering. Status of enacted, repealed, proposed is on all rules. Allow regular users to propose rules. Allow comments on rules.

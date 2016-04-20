@@ -54,4 +54,16 @@ Saves = require "models.Saves"
                 save.filename = "download"
                 save.filetype = save.file\match "^.+(%..+)$"
                 save\update "filename", "filetype"
+    [10]: =>
+        create_table "mods", {
+            {"id", types.serial primary_key: true}
+            {"name", types.text unique: true}
+            {"status", types.integer default: 0} -- using an enum, default to no_status
+            {"description", types.text}
+            {"info_link", types.text}
+            {"download_link", types.text unique: true}
+            {"config_download", types.text unique: true}
+            {"version", types.text}
+            {"notes", types.text}
+        }
 }
