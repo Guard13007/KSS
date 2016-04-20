@@ -4,7 +4,13 @@ Users = require "models.Users"
 
 class UploadWidget extends Widget
     content: =>
-        p "Please upload a compressed save file. Write a brief report about what has changed in the save file."
+        p "Please upload a compressed save file. Write a brief report about what has changed in the save file. Please include the following in your report:"
+        ol ->
+            li "Craft launched, their part counts, their mission(s)."
+            li "Parts used out of your allotment, parts left, etc."
+            li "Bases taken, craft lost, etc."
+            li "Anything else you feel is appropriate."
+        p "(Basically, as much of a proper mission report as you can.)"
         p ->
             text "(Max filesize is 50 MB. If you feel this is too small, please "
             a href: "https://discord.gg/0e25Cmk0wjIXjc5I", target: "_blank", "contact an administrator"
