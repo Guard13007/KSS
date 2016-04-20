@@ -22,7 +22,7 @@ class SavesApp extends lapis.Application
             return status: 404, h3 "Save not found."
 
         @title = "Save File"
-        @subtitle = @save.id
+        @subtitle = "(#{@save.filetype} file)"
         render: true
 
     [modify_save: "/modify_save"]: respond_to {

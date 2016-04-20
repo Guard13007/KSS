@@ -11,10 +11,10 @@ markdown = (input) ->
         return writer.string s
 
     parse = lunamark.reader.markdown.new writer, {
-        definition_lists: true
-        require_blank_before_blockquote: true
-        require_blank_before_header: true
-        hash_enumerators: true
+        --definition_lists: true
+        --require_blank_before_blockquote: true
+        --require_blank_before_header: true
+        --hash_enumerators: true
     }
 
     -- return parse input

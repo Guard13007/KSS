@@ -5,6 +5,8 @@ import create_table
 
 db = require "lapis.db"
 
+Saves = require "models.Saves"
+
 {
     [1]: =>
         create_table "users", {
@@ -43,4 +45,13 @@ db = require "lapis.db"
         }
     [7]: =>
         drop_table "xss"
+    [8]: =>
+        add_column "saves", "filename", types.text default: "null"
+        add_column "saves", "filetype", types.text default: "null"
+    [9]: =>
+        if saves = Saves\select "ORDER BY created_at DESC"
+            for save in *saves
+                save.filename = "download"
+                save.filetype = save.file\match "^.+(%..+)$"
+                save\update "filename", "filetype"
 }

@@ -1,5 +1,5 @@
 import Widget from require "lapis.html"
---import markdown from require "helpers.parsing"
+import markdown from require "helpers.parsing"
 
 Users = require "models.Users"
 
@@ -14,7 +14,9 @@ class SaveWidget extends Widget
         --    raw -> markdown @save.report
         hr!
         p "Created by: ", user.name
-        p -> a href: @build_url(@save.file), download: true, "Download" --TODO make file ext available here
+        p ->
+            a href: @build_url(@save.file), download: "#{@save.filename .. @save.filetype}", "Download"
+            text " (#{@save.filename .. @save.filetype})"
 
         if @session.id
             if current_user = Users\find id: @session.id

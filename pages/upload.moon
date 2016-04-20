@@ -5,6 +5,7 @@ Saves = require "models.Saves"
 Users = require "models.Users"
 
 import respond_to, assert_error from require "lapis.application"
+import gmt_date from require "helpers.time"
 
 file_exists = (filename) ->
     handle = io.open(filename, "r")
@@ -23,7 +24,7 @@ class UploadApp extends lapis.Application
                 return "You must be logged in to upload."
 
             user = Users\find id: @session.id
-            day = os.date("!*t").wday
+            day = gmt_date!.wday
 
             if not (user.weekday == day) and (not user.admin)
                 return "You are not allowed to upload today. Please check the schedule."
@@ -39,25 +40,29 @@ class UploadApp extends lapis.Application
                 return "You must be logged in to upload a file."
 
             -- is the user allowed to upload now?
-            day = os.date("!*t").wday
+            day = gmt_date!.wday
             user = Users\find id: @session.id
             if not (user.weekday == day) and (not user.admin) --if not their day and not admin
                 return "You are not allowed to upload today. Please check the schedule."
 
             file = @params.file
             if #file.content > 0
-                date = os.date("!%Y.%m.%d.%H.%M.%S")
-                filename = "static/uploads/#{date .. file.filename\match("^.+(%..+)$")}" --TODO make this a file_ext function ? also store file extension
+                date = os.date "!%Y.%m.%d.%H.%M.%S"
+                ext = file.filename\match "^.+(%..+)$"
+                save_file = "static/uploads/#{date .. ext}"
+                filename = file.filename\sub(1, -ext\len! - 1)
 
-                if file_exists filename
+                if file_exists save_file
                     return "Error: Please upload again in a moment, and report this error to Guard13007 immediately." --TODO remove the need for this error (by automatically choosing a new file name)
 
-                File = assert_error io.open filename, "w"
+                File = assert_error io.open save_file, "w"
                 File\write file.content
                 File\close!
 
                 new_save, errorMsg = Saves\create {
-                    file: filename
+                    file: save_file
+                    filename: filename
+                    filetype: ext
                     report: @params.report
                     user_id: user.id
                 }
