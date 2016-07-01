@@ -30,7 +30,7 @@ environment. Feel free to skip any steps not necessary for one or the other if
 you are not.
 
 1. Install prerequisites for prerequisites:
-   `sudo apt-get install git lua5.1 liblua5.1-0-dev unzip libreadline-dev libncurses5-dev libpcre3-dev libssl-dev perl make build-essential postgres`
+   `sudo apt-get install git lua5.1 liblua5.1-0-dev unzip libreadline-dev libncurses5-dev libpcre3-dev libssl-dev perl make build-essential postgresql`
 2. Install LuaRocks and OpenResty:
    ```bash
    # OpenResty
@@ -49,7 +49,10 @@ you are not.
    sudo make install
    ```
 3. Install rocks:
-   `sudo luarocks install lapis moonscript lpeg lunamark`
+   `sudo luarocks install lapis`
+   `sudo luarocks install moonscript`
+   `sudo luarocks install lpeg`
+   `sudo luarocks install lunamark`
 4. Set your PostgreSQL password, setup databases:
    ```bash
    # change user: su - postgres [OR] sudo -i -u postgres
