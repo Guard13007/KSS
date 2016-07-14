@@ -8,18 +8,25 @@ Very work-in-progress, but functional.
 
 1. Install prerequisites.
    (OpenResty, PostgreSQL, luarocks, moonscript, Lapis, LPeg)
+
 2. Setup database(s).
    (for production: `kss_live`, for development: `kss_dev`)
+
 3. Create `secret.moon` with database password and a secret string.
    (see `secret.moon.example` for an example)
+
 4. Place SSL certificate in `ssl/`.
    (public: `fullchain.pem`, private: `privkey.pem`)
+
 5. Compile moonscript files.
    (run `moonc .`)
+
 6. Run migrations.
    (run `lapis migrate [env]` (env is `production` or `development`))
+
 7. Start the server.
    (run `lapis server [env]` (env is `production` or `development`))
+
 8. Log into the default admin account and change its password.
    (username: `admin`, password `changeme`)
 
@@ -31,6 +38,7 @@ you are not.
 
 1. Install prerequisites for prerequisites:
    `sudo apt-get install git lua5.1 liblua5.1-0-dev unzip libreadline-dev libncurses5-dev libpcre3-dev libssl-dev perl make build-essential postgresql`
+
 2. Install LuaRocks and OpenResty:
    ```bash
    # OpenResty
@@ -48,11 +56,13 @@ you are not.
    make build
    sudo make install
    ```
+
 3. Install rocks:
    `sudo luarocks install lapis`
    `sudo luarocks install moonscript`
    `sudo luarocks install lpeg`
    `sudo luarocks install lunamark`
+
 4. Set your PostgreSQL password, setup databases:
    ```bash
    # change user: su - postgres [OR] sudo -i -u postgres
@@ -63,12 +73,14 @@ you are not.
    createdb kss_dev
    exit
    ```
+
 5. Clone repository and set up `secret.moon`:
    ```
    git clone https://github.com/Guard13007/KSS.git
    cp secret.moon.example secret.moon
    nano secret.moon   # or your editor of choice
    ```
+
 6. Put SSL certificate and private key in `ssl/`:
    ```bash
    # I recommend installing Let's Encrypt: https://letsencrypt.org/getting-started/
@@ -82,6 +94,7 @@ you are not.
    # now you can easily renew certificates:
    # letsencrypt renew [OR] ./letsencrypt-auto renew
    ```
+
 7. Set up proxy server on port 80 (note: this is an nginx config):
    ```
    http {
@@ -136,6 +149,7 @@ you are not.
        }
    }
    ```
+
 8. Compile moonscript and run migrations/server:
    ```bash
    moonc .
