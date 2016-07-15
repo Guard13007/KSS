@@ -5,6 +5,7 @@ Users = require "models.Users"
 
 import respond_to, assert_error from require "lapis.application"
 import unescape from require "lapis.util"
+import const_compare from require "helpers.security"
 
 class UsersApp extends lapis.Application
     "/user": => redirect_to: @url_for("users"), status: 301
@@ -74,7 +75,7 @@ class UsersApp extends lapis.Application
                         else
                             return "Error deleting user."
 
-                    if user.password == @params.oldpassword
+                    if const_compare user.password, @params.oldpassword
                         assert_error user\update password: @params.password
                     else
                         return "Invalid password."
@@ -118,7 +119,7 @@ class UsersApp extends lapis.Application
                 return "Invalid token. Please try again."
 
             if user = Users\find name: @params.name
-                if user.password == @params.password
+                if const_compare user.password, @params.password
                     @session.id = user.id
                     return redirect_to: @url_for index
 
